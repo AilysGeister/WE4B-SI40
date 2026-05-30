@@ -15,5 +15,11 @@ export class FilmCarouselComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  protected readonly Math = Math;
+  formatDuration(minutes: number): string {
+    if (!minutes) return '';
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    // Le padStart permet d'écrire "05" au lieu de "5"
+    return `${hours}h${mins.toString().padStart(2, '0')}`;
+  }
 }

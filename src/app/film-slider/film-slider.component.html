@@ -7,10 +7,13 @@
     <div *ngFor="let film of films" class="films-carousel" id="filmsCarousel">
       <a href="" class="film-cover-card">
         <div class="film-cover-wrapper">
-          <div class="film-cover-wrapper featured-carousel-cover" *ngIf="film.cover != null; then thenBlock else elseBlock">
-            <ng-template #thenBlock><img src="{# asset(path=item.film.coverPath, packageName = 'films_cover') #}" [alt]="'Affiche du film' + film.title" class="film-cover-img"/></ng-template>
-            <ng-template #elseBlock><div class="film-no-cover">No Cover</div></ng-template>
-          </div>
+          <div class="film-cover-wrapper featured-carousel-cover" *ngIf="film.coverPath; then thenBlock else elseBlock"></div>
+          <ng-template #thenBlock>
+            <img [src]="'assets/films_cover/' + film.coverPath" [alt]="'Affiche du film ' + film.title" class="film-cover-img"/>
+          </ng-template>
+          <ng-template #elseBlock>
+            <div class="film-no-cover">No Cover</div>
+          </ng-template>
           <div class="film-cover-overlay">
             <div class="film-title-hover">
               <h3>{{ film.title }}</h3>
