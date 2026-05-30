@@ -8,7 +8,7 @@ export class Film {
     public description: string,
     public duration: number,
     public slug: string,
-    public image: string,
+    public cover: string,
     public price: number,
     public genres: Genre[],
     public actors: Person[],
@@ -19,7 +19,7 @@ export class Film {
     this.description = description;
     this.duration = duration;
     this.slug = slug;
-    this.image = image;
+    this.cover = cover;
     this.price = price;
     this.genres = genres;
     this.actors = actors;

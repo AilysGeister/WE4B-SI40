@@ -1,0 +1,36 @@
+<div id="carouselExampleIndicators" class="carousel slide featured-carousel" data-bs-ride="carousel">
+
+  <div *ngFor="let film of pinnedFilms; let i = index" class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ i-1 }}" class="{% if loop.index==1 %}active{% endif %}"></button>
+  </div>
+
+  <div *ngFor="let film of pinnedFilms;" class="carousel-inner carousel-frame featured-carousel-inner">
+    <div class="carousel-item {% if loop.index==1 %}active{% endif %}">
+      <article class="film-pined featured-carousel-card">
+        <a href="" class="featured-carousel-cover-link">
+          <div class="film-cover-wrapper featured-carousel-cover" *ngIf="film.cover != null; then thenBlock else elseBlock">
+            <ng-template #thenBlock><img src="{# asset(path=item.film.coverPath, packageName = 'films_cover') #}" [alt]="'Affiche du film' + film.title" class="film-cover-img"/></ng-template>
+            <ng-template #elseBlock><div class="film-no-cover">No Cover</div></ng-template>
+          </div>
+        </a>
+        <div class="featured-carousel-content">
+          <h2><a href="">{{ film.title }}</a></h2>
+          <strong *ngIf="film.duration != 0"> {{ Math.floor(film.duration / 60) }}h{{ film.duration % 60 }} </strong>
+          <p>{{ film.description }}</p>
+          <div class="film-pined-genre featured-carousel-genres" *ngFor="let genre of film.genres">
+            <span>{{ genre.name }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>

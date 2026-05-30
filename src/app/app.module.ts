@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FilmCarouselComponent } from './film-carousel/film-carousel.component';
+import { FilmSliderComponent } from './film-slider/film-slider.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FilmCarouselComponent,
+    FilmSliderComponent
   ],
   imports: [
     BrowserModule,
