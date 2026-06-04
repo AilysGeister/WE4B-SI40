@@ -1,0 +1,18 @@
+<div class="form-signin m-auto">
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <img class="mb-4" src="assets/images/logo.png" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Veuillez vous connecter</h1>
+
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingEmail" placeholder="nom@exemple.fr" formControlName="email">
+      <label for="floatingEmail">Adresse Email</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe" formControlName="password">
+      <label for="floatingPassword">Mot de passe</label>
+    </div>
+
+    <input class="btn btn-lg btn-primary w-100" type="submit" [disabled]="loginForm.invalid" value="Connexion"/>
+  </form>
+</div>
