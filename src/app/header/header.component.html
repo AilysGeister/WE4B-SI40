@@ -1,0 +1,60 @@
+<header>
+  <nav class="navbar navbar-expand-lg site-navbar" data-bs-theme="light">
+    <div class="container-fluid site-navbar-shell">
+      <a class="navbar-brand site-navbar-brand" routerLink="/">Logo</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse site-navbar-collapse" id="navbarSupportedContent">
+        <form class="d-flex site-navbar-search" role="search" (submit)="onSearchSubmit($event)">
+          <div class="position-relative w-100 me-2">
+            <input class="form-control" id="query" name="query" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchQuery" (input)="onSearchInput(searchQuery)" autocomplete="off"/>
+            <ul class="dropdown-menu show" *ngIf="searchResults.length > 0 && searchQuery">
+              <li *ngFor="let result of searchResults">
+                <button class="dropdown-item" type="button" (click)="searchQuery = result; searchResults = []">{{ result }}</button>
+              </li>
+            </ul>
+          </div>
+          <button class="btn btn-outline-success" type="submit">Chercher</button>
+        </form>
+
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 site-navbar-links">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" routerLink="/">Acceuil</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/film">Films</a>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="currentUser$ | async as currentUser; else anonymousUser" class="header-user-connection site-navbar-user">
+        <div class="site-navbar-user-info">
+          <div>
+            <a [routerLink]="['/profile', currentUser.id]" style="text-decoration: none; color: inherit">{{ currentUser.username }}</a>
+          </div>
+          <div>
+            <span *ngIf="hasRole(currentUser, ['ROLE_MODERATOR', 'ROLE_FUND_MANAGER', 'ROLE_ADMIN'])">
+              <a routerLink="/tools">Outils</a> •
+            </span>
+            <span><a href="#" (click)="logout(); $event.preventDefault()">Déconnexion</a></span>
+          </div>
+        </div>
+
+        <a [routerLink]="['/profile', currentUser.id]" class="round-crop" [style.backgroundImage]="currentUser.person?.photo ? 'url(' + BASE_URL + 'resources/images/profil_pictures/' + currentUser.person?.photo + ')' : 'url(assets/images/profil_pictures/default.png)'">
+        </a>
+        <a routerLink="/basket">
+          <i class="bi bi-cart"></i>
+        </a>
+      </div>
+
+      <ng-template #anonymousUser>
+        <div class="site-navbar-auth">
+          <span><a routerLink="/login">Connexion</a></span> •
+          <span><a routerLink="/register">Inscription</a></span>
+        </div>
+      </ng-template>
+    </div>
+  </nav>
+</header>

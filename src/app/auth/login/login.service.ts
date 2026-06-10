@@ -83,7 +83,7 @@ export class LoginService {
    * Demande les informations de l'utilisateur connecté à l'API.
    * @private
    */
-  private getMe(): Observable<User> {
+  public getMe(): Observable<User> {
     return this.http.get<User>(this.BASE_URL + '/me').pipe(
       map((json: any) => {
         const userInstance = new User();

@@ -1,0 +1,38 @@
+.card {
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.card-footer {
+  font-size: small;
+  font-style: italic;
+}
+
+img {
+  width: 10em;
+  height: 10em;
+}
+
+.round-con-success, .round-con-failure {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+}
+
+.round-con-success {
+  background-color: green;
+}
+
+.round-con-failure {
+  background-color: darkred;
+}

@@ -1,0 +1,28 @@
+.form-register {
+  max-width: 400px;
+  padding: 15px;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input {
+  border-radius: 0;
+}
+
+.form-register input[type="submit"] {
+  border-radius: 0.5rem;
+}
+
+.form-register input[id="floatingFirstname"] {
+  margin-bottom: -1px;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
+}
+
+.form-register input[id="floatingConfirmPassword"] {
+  margin-bottom: 10px;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
