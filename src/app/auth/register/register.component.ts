@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
     }
 
     //Vérification du mot de passe:
-    if (this.registerForm.get('password')?.value !== this.registerForm.get('confirmPassword')?.value) {
+    if (this.registerForm.get('password')?.value.equals(this.registerForm.get('confirmPassword')?.value)) {
       this.message = "Les mots de passe ne correspondent pas."
       return;
     }
