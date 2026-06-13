@@ -1,0 +1,26 @@
+<div class="film-card">
+  <a class="film-cover-card" routerLink="{{ film.slug }}">
+    <div class="film-cover-wrapper">
+      <img *ngIf="film.coverPath; else noPicture" class="film-cover-img" [src]="BASE_URL + film.coverPath" alt="Affiche du film {{ film.title }}."/>
+      <ng-template #noPicture>Pas d'affiche</ng-template>
+      <div class="film-cover-overlay">
+        <div class="film-title-hover">
+          <h3>{{ film.title }}</h3>
+        </div>
+      </div>
+    </div>
+  </a>
+
+
+  <div class="film-card-info">
+    <h3 class="film-card-title"><a routerLink="{{ film.slug }}">{{ film.title }}</a></h3>
+
+    <div class="film-duration"><img src="assets/icons/horloge.svg" alt="Icone d'horloge." /> {{ film.getFormatedDuration() }}</div>
+
+    <p class="film-card-description">{{ film.description ? (film.description.length > 300 ? (film.description | slice:0:300) + '...' : film.description) : '' }}</p>
+
+    <div class="film-pined-genre">
+      <span *ngFor="let genre of film.genres">{{ genre.name }}</span>
+    </div>
+  </div>
+</div>

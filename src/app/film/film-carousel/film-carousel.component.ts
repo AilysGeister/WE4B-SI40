@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Film } from "src/models/Film";
+import {Component, OnInit} from '@angular/core';
+import {Film} from "src/models/film.model";
 
 @Component({
   selector: 'app-film-carousel',
@@ -10,7 +10,7 @@ export class FilmCarouselComponent implements OnInit {
 
   pinnedFilms: Film[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
@@ -19,7 +19,6 @@ export class FilmCarouselComponent implements OnInit {
     if (!minutes) return '';
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    // Le padStart permet d'écrire "05" au lieu de "5"
-    return `${hours}h${mins.toString().padStart(2, '0')}`;
+    return hours + 'h' + mins.toString().padStart(2, '0');
   }
 }

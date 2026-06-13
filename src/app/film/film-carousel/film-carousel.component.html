@@ -24,7 +24,7 @@
         </a>
         <div class="featured-carousel-content">
           <h2><a href="">{{ film.title }}</a></h2>
-          <strong *ngIf="film.duration > 0"> {{ formatDuration(film.duration) }} </strong>
+          <strong *ngIf="film.duration"> {{ formatDuration(film.duration) }} </strong>
           <p>{{ film.description }}</p>
           <div class="film-pined-genre featured-carousel-genres" *ngFor="let genre of film.genres">
             <span>{{ genre.name }}</span>

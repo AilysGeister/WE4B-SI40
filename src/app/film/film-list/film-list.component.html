@@ -1,0 +1,5 @@
+<h1>Tous les films</h1>
+<div *ngIf="films.length!=0; else noFilms" class="films-grid">
+  <app-film-card *ngFor="let film of films" [film]="film"></app-film-card>
+</div>
+<ng-template #noFilms><em>Aucun films trouvé</em></ng-template>

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {Film} from "../../models/Film";
+import {Component, OnInit} from '@angular/core';
+import {Film} from "../../../models/film.model";
 
 @Component({
   selector: 'app-film-slider',
@@ -10,9 +10,8 @@ export class FilmSliderComponent implements OnInit {
 
   films: Film[] = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
   }
-
 }
