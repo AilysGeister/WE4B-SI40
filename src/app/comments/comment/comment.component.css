@@ -1,0 +1,12 @@
+article {
+  padding: 1em;
+  margin-top: 1em;
+  border-top: 0.5em solid #1d3043;
+  background-color: #354a5f;
+  color: azure;
+}
+
+button {
+  border: none;
+  background: none;
+}
