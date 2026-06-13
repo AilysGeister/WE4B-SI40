@@ -44,7 +44,7 @@ img {
 .burger-btn {
   display: none;
   position: relative;
-  top: 4em;
+  top: 1em;
   z-index: 1050;
   flex-direction: column;
   justify-content: space-between;
