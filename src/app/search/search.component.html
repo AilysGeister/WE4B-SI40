@@ -1,0 +1,22 @@
+<div class="row">
+  <p>Résultats pour: {{ query }}</p>
+
+  <div class="col-md-6 col-sm-12">
+    <h1>Films</h1>
+    <table class="table table-striped" *ngif="films.length != 0; else noResult">
+      <tr><th>Titre</th></tr>
+      <tr *ngFor="let film of films">
+        <td><a><img class="imagePreview" src="assets/images/film_cover/{{ film.cover_path }}" alt="Affiche du film {{ film.title }}."/>{{ film.title }}</a></td>
+      </tr>
+    </table>
+
+    <table class="table table-striped" *ngif="personalities.length != 0; else noResult">
+      <tr><td>Nom</td></tr>
+      <tr *ngFor="let personality of personalities">
+        <td><a><img src="assets/images/profil_pictures/{{ personality.picture_path }}" alt="Photo de {{ personality.name }}."/>{{ personality.name }}</a></td>
+      </tr>
+    </table>
+
+    <ng-template #noResult><em>Aucun résultat ne correspond à votre recherche.</em></ng-template>
+  </div>
+</div>
