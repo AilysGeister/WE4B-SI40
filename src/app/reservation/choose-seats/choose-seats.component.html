@@ -1,0 +1,101 @@
+<div class="reservation-page">
+  <div class="hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Réservation de sièges</p>
+      <h1>Choisissez votre place</h1>
+      <p class="subtitle">
+        Séance du <strong>{{ getFormattedDate() }}</strong> à <strong>{{ getFormattedTime() }}</strong>
+        pour <strong>"{{ programme?.film?.title }}"</strong>
+      </p>
+    </div>
+
+    <div class="hero-meta">
+      <div>
+        <span>Sièges sélectionnés</span>
+        <strong>{{ selectedSeats.size }}</strong>
+      </div>
+      <div>
+        <span>Total</span>
+        <strong>{{ totalPrice.toFixed(2) }}€</strong>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="state-panel">Chargement des sièges...</div>
+
+  <div *ngIf="!loading && error" class="state-panel state-error">
+    {{ error }}
+  </div>
+
+  <ng-container *ngIf="!loading && !error">
+    <section class="seat-plan-panel">
+      <div class="screen">Écran</div>
+
+      <div class="seat-plan" *ngIf="seats.length > 0; else noSeats">
+        <div class="seat-row" *ngFor="let row of getRowIndexes()">
+          <button
+            *ngFor="let seat of getRowSeats(row * seatsPerRow); trackBy: trackBySeatId"
+            type="button"
+            class="seat"
+            [class.first-class]="getSeatTone(seat) === 'first-class'"
+            [class.second-class]="getSeatTone(seat) === 'second-class'"
+            [class.selected]="getSeatClassName(seat) === 'selected'"
+            [class.reserved]="getSeatClassName(seat) === 'reserved'"
+            [disabled]="isReserved(seat)"
+            (click)="toggleSeat(seat)"
+            [attr.aria-label]="'Siège ' + getSeatLabel(seat)">
+            <span>{{ getSeatLabel(seat) }}</span>
+          </button>
+        </div>
+      </div>
+
+      <ng-template #noSeats>
+        <div class="state-panel">
+          Aucun siège n’est disponible pour cette salle.
+        </div>
+      </ng-template>
+    </section>
+
+    <section class="summary-grid">
+      <div class="legend-panel">
+        <h2>Légende</h2>
+        <div class="legend-list">
+          <div class="legend-item">
+            <span class="legend-swatch available"></span>
+            <span>Libre</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-swatch selected"></span>
+            <span>Sélectionné</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-swatch reserved"></span>
+            <span>Réservé</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="price-panel">
+        <h2>Prix</h2>
+        <div class="price-line" *ngIf="firstClassCount > 0">
+          <span>{{ firstClassCount }} x {{ (filmPrice * firstClassMultiplier).toFixed(2) }}€ première classe</span>
+          <strong>{{ firstClassTotal.toFixed(2) }}€</strong>
+        </div>
+        <div class="price-line" *ngIf="secondClassCount > 0">
+          <span>{{ secondClassCount }} x {{ filmPrice.toFixed(2) }}€ seconde classe</span>
+          <strong>{{ secondClassTotal.toFixed(2) }}€</strong>
+        </div>
+        <div class="price-total">
+          <span>Total</span>
+          <strong>{{ totalPrice.toFixed(2) }}€</strong>
+        </div>
+      </div>
+    </section>
+
+    <form class="actions" (ngSubmit)="submitReservation()">
+      <button type="submit" class="cta">
+        Confirmer la réservation
+      </button>
+    </form>
+  </ng-container>
+</div>

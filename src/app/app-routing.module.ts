@@ -10,6 +10,7 @@ import {AdminPagesComponent} from "./admin-pages/admin-pages.component";
 import {AdminGuard} from "./admin-pages/admin.guard";
 import {AuthGuard} from "./auth/auth.guard";
 import {GuestGuard} from "./auth/guest.guard";
+import {ChooseSeatsComponent} from "./reservation/choose-seats/choose-seats.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
 
     ]},
   {path: 'search/:query', component: SearchComponent},
+  {path: 'reservation/choose-seats/:programmeId', component: ChooseSeatsComponent},
 ];
 
 @NgModule({
