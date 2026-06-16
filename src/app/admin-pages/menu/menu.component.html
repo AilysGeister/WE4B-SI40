@@ -4,15 +4,15 @@
   <span></span>
 </button>
 <aside id="menu" data-bs-theme="light" [class.open]="isMenuOpen">
-  <div>
+  <div *ngIf="isModerator()">
     <strong><img src="assets/icons/dashboard/chat.svg" alt="icone commentaire"> Commentaires</strong>
     <ul>
-      <li><a>Derniers signalements</a></li>
-      <li><a>Tous les signalements</a></li>
-      <li><a>Tous les commentaires</a></li>
+      <li><a routerLink="/tools/reports/active">Derniers signalements</a></li>
+      <li><a routerLink="/tools/reports">Tous les signalements</a></li>
+      <li><a routerLink="/tools/comments">Tous les commentaires</a></li>
     </ul>
   </div>
-  <div>
+  <div *ngIf="isFundManager()">
     <strong><img src="assets/icons/dashboard/watching.svg" alt="icone film"> Gestion des Films</strong>
     <ul>
       <li><a>Films & Genres</a></li>
@@ -22,7 +22,7 @@
       <li><a>Langues</a></li>
     </ul>
   </div>
-  <div>
+  <div *ngIf="isAdmin()">
     <strong><img src="assets/icons/dashboard/group.svg" alt="icone individus"> Gestions des Individus</strong>
     <ul>
       <li><a>Utilisateurs</a></li>
