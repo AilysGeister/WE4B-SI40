@@ -52,7 +52,6 @@ export class NewCommentComponent {
       next: (comment) => {
         this.created.emit(comment);
         this.formComment.reset();
-        this.message = "Commentaire publié avec succès !";
       },
       error: (err) => {
         this.message = err.error?.message || "Une erreur est survenue.";

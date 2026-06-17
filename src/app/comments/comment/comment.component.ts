@@ -23,7 +23,7 @@ export class CommentComponent {
   get canDelete(): boolean {
     if (!this.currentUser || !this.comment.author) return false;
     const isAuthor = this.currentUser.id === this.comment.author.id;
-    const isMod = this.currentUser.roles?.includes('ROLE_MODERATOR');
+    const isMod = (this.currentUser.getHighestRole() === 'Administrateur' || this.currentUser.getHighestRole() === 'Modérateur');
     return isAuthor || isMod;
   }
 
@@ -41,9 +41,9 @@ export class CommentComponent {
    */
   onDelete(): void {
     if (confirm('Êtes vous sûr de vouloir supprimer ce commentaire (cette action est irréversible) ?') && this.comment.id) {
-      //this.commentService.delete(this.comment.id).subscribe(() => {
-        //this.deleted.emit(this.comment.id);
-      //});
+      this.commentService.delete(this.comment.id).subscribe(() => {
+        this.deleted.emit(this.comment.id);
+      });
     }
   }
 
@@ -51,8 +51,8 @@ export class CommentComponent {
    * Création d'un nouveau signalement
    */
   onReport(): void {
-   // if (confirm('Êtes vous sûr de vouloir signaler ce commentaire ?') && this.comment.id) {
-     // this.commentService.report(this.comment.id).subscribe(() => alert('Votre signalement à bien été pris en compte.'));
-    //}
+    if (confirm('Êtes vous sûr de vouloir signaler ce commentaire ?') && this.comment.id) {
+      this.commentService.report(this.comment.id).subscribe(() => alert('Votre signalement à bien été pris en compte.'));
+    }
   }
 }

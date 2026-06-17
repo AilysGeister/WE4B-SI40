@@ -24,6 +24,11 @@ import { FilmComponent } from './film/film/film.component';
 import { FilmCardComponent } from './film/film-card/film-card.component';
 import { FilmListComponent } from './film/film-list/film-list.component';
 import { SearchComponent } from './search/search.component';
+import { LastReportsComponent } from './admin-pages/reports/last-reports/last-reports.component';
+import { ReportComponent } from './admin-pages/reports/report/report.component';
+import { CommentsComponent } from './admin-pages/comments/comments.component';
+import { DashboardComponent } from './admin-pages/dashboard/dashboard.component';
+import { ReportsListComponent } from './admin-pages/reports/reports-list/reports-list.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +51,11 @@ import { SearchComponent } from './search/search.component';
     FilmComponent,
     FilmCardComponent,
     SearchComponent,
+    LastReportsComponent,
+    ReportComponent,
+    CommentsComponent,
+    DashboardComponent,
+    ReportsListComponent,
   ],
   imports: [
     BrowserModule,

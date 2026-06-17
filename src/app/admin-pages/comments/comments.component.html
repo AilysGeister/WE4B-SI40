@@ -1,0 +1,48 @@
+<div>
+  <h1>Commentaires:</h1>
+
+  <div class="row mb-4 align-items-end">
+    <div class="col-md-4">
+      <label for="statusSelect" class="form-label font-weight-bold">Avec corbeil :</label>
+      <select
+        id="statusSelect"
+        class="form-select form-control"
+        [(ngModel)]="selectedStatut"
+        (change)="onFilterChange()">
+        <option value="false">Non</option>
+        <option value="Tous">Oui</option>
+        <option value="true">Exclusivement</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="sortSelect" class="form-label font-weight-bold">Trier par date :</label>
+      <select
+        id="sortSelect"
+        class="form-select form-control"
+        [(ngModel)]="selectedSort"
+        (change)="onFilterChange()">
+        <option value="ID-ASC">ID Croissant</option>
+        <option value="ID-DESC">ID Décroissant</option>
+        <option value="ALPHA-ASC">Du plus ancien au plus récent</option>
+        <option value="ALPHA-DESC">Du plus récent au plus ancien</option>
+        <option value="DATE-ASC">Titre A → Z</option>
+        <option value="DATE-DESC">Titre Z → A</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="table table-striped" *ngIf="visibleComments.length != 0; else noComments">
+    <thead>
+    <tr>
+      <th>ID</th><th>Titre</th><th>Auteur</th><th>Création</th><th>Mise à jour</th><th>Film</th><th>Statut</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let comment of visibleComments">
+      <td>{{ comment.id }}</td><td>{{ comment.title }}</td><td>{{ comment.author.username }}</td><td>{{ comment.created_at | date:'dd/MM/yyyy hh:mm':'UTC +1'  }}</td><td>{{ comment.updated_at | date:'dd/MM/yyyy hh:mm':'UTC +1'  }}</td><td>film</td><td>{{ comment.is_visible }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <ng-template #noComments><em>Aucun commentaires à afficher.</em></ng-template>
+</div>
+
