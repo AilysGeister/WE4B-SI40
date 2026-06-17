@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
   onSearchSubmit(event: Event): void {
     event.preventDefault();
     if (this.searchQuery.trim()) {
-      this.router.navigate(['/search'], { queryParams: { query: this.searchQuery } });
+      this.router.navigate(['/search', this.searchQuery]);
     }
   }
 

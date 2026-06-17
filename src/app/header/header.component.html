@@ -10,11 +10,6 @@
         <form class="d-flex site-navbar-search" role="search" (submit)="onSearchSubmit($event)">
           <div class="position-relative w-100 me-2">
             <input class="form-control" id="query" name="query" type="search" placeholder="Search" aria-label="Search" [(ngModel)]="searchQuery" (input)="onSearchInput(searchQuery)" autocomplete="off"/>
-            <ul class="dropdown-menu show" *ngIf="searchResults.length > 0 && searchQuery">
-              <li *ngFor="let result of searchResults">
-                <button class="dropdown-item" type="button" (click)="searchQuery = result; searchResults = []">{{ result }}</button>
-              </li>
-            </ul>
           </div>
           <button class="btn btn-outline-success" type="submit">Chercher</button>
         </form>
