@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Film} from "../../../models/film.model";
 
 @Component({
@@ -8,7 +8,7 @@ import {Film} from "../../../models/film.model";
 })
 export class FilmSliderComponent implements OnInit {
 
-  films: Film[] = [];
+  @Input() films!: Film[] | undefined;
 
   constructor() {}
 

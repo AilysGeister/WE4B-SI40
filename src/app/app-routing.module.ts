@@ -15,6 +15,7 @@ import {ReportComponent} from "./admin-pages/reports/report/report.component";
 import {DashboardComponent} from "./admin-pages/dashboard/dashboard.component";
 import {ReportsListComponent} from "./admin-pages/reports/reports-list/reports-list.component";
 import {CommentsComponent} from "./admin-pages/comments/comments.component";
+import {PersonalityComponent} from "./personality/personality.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
   {path: 'film', component: FilmListComponent},
   {path: 'film/:slug', component: FilmComponent},
+  {path: 'personality/:id', component: PersonalityComponent},
   {path: 'tools', component: AdminPagesComponent, canActivate: [AdminGuard], canActivateChild: [AdminGuard], data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR'] },
     children: [
       { path: '', component: DashboardComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR']}},

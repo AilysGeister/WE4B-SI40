@@ -29,6 +29,7 @@ import { ReportComponent } from './admin-pages/reports/report/report.component';
 import { CommentsComponent } from './admin-pages/comments/comments.component';
 import { DashboardComponent } from './admin-pages/dashboard/dashboard.component';
 import { ReportsListComponent } from './admin-pages/reports/reports-list/reports-list.component';
+import { PersonalityComponent } from './personality/personality.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { ReportsListComponent } from './admin-pages/reports/reports-list/reports
     CommentsComponent,
     DashboardComponent,
     ReportsListComponent,
+    PersonalityComponent,
   ],
   imports: [
     BrowserModule,
