@@ -19,9 +19,11 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
 
   programmeId!: number;
   programme: any = null;
+  film: any = null;
   room: any = null;
   seats: any[] = [];
   reservations: any[] = [];
+  currentUserReservationId: number | null = null;
   reservedSeatsIds: Set<number> = new Set();
   selectedSeats: Set<number> = new Set();
   currentUser: User | null = null;
@@ -115,6 +117,7 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
 
       const { programme, film, seats, reservations } = result as { programme: any; film: any; seats: any[]; reservations: any[] };
       this.programme = programme;
+      this.film = film;
       this.filmPrice = Number(film?.price ?? 0);
       this.seats = this.sortSeats(seats);
       this.reservations = reservations;
@@ -192,19 +195,27 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
     }
 
     const seatIds = Array.from(this.selectedSeats);
-
-    this.reservationService.createReservation({
+    const updatePayload = { seatIds };
+    const createPayload = {
       programmeId: this.programme?.id ?? this.programmeId,
       seatIds,
       userId: this.currentUser.id,
       basket: this.programme?.basket?.id ?? null
-    }).subscribe({
+    };
+
+    this.currentUserReservationId = this.findCurrentUserReservationId(this.reservations);
+
+    const request$ = this.currentUserReservationId !== null
+      ? this.reservationService.updateReservation(this.currentUserReservationId, updatePayload)
+      : this.reservationService.createReservation(createPayload);
+
+    request$.subscribe({
       next: () => {
         this.error = null;
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.handleError('Erreur lors de la création de la réservation', err);
+        this.handleError('Erreur lors de l’enregistrement de la réservation', err);
       }
     });
   }
@@ -312,21 +323,32 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
     return Number.isFinite(userId) ? userId : null;
   }
 
+  private getReservationId(reservation: any): number | null {
+    const candidate = reservation?.reservationId ?? reservation?.id;
+    const reservationId = Number(candidate);
+    return Number.isFinite(reservationId) ? reservationId : null;
+  }
+
   private syncSeatState(reservations: any[]): void {
     const currentUserId = this.currentUser?.id !== undefined ? Number(this.currentUser.id) : null;
     const selectedIds = new Set<number>();
     const reservedIds = new Set<number>();
 
+    this.currentUserReservationId = this.findCurrentUserReservationId(reservations);
+
     for (const reservation of reservations) {
       const reservationUserId = this.getReservationUserId(reservation);
       const seatIds = this.getReservationSeatIds(reservation);
 
-      for (const seatId of seatIds) {
-        if (currentUserId !== null && reservationUserId === currentUserId) {
+      if (currentUserId !== null && reservationUserId === currentUserId) {
+        for (const seatId of seatIds) {
           selectedIds.add(seatId);
-        } else {
-          reservedIds.add(seatId);
         }
+        continue;
+      }
+
+      for (const seatId of seatIds) {
+        reservedIds.add(seatId);
       }
     }
 
@@ -341,6 +363,27 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  private findCurrentUserReservation(reservations: any[]): any | null {
+    const currentUserId = this.currentUser?.id !== undefined ? Number(this.currentUser.id) : null;
+
+    if (currentUserId === null) {
+      return null;
+    }
+
+    return reservations.find(reservation => this.getReservationUserId(reservation) === currentUserId) ?? null;
+  }
+
+  private findCurrentUserReservationId(reservations: any[]): number | null {
+    const currentUserId = this.currentUser?.id !== undefined ? Number(this.currentUser.id) : null;
+
+    if (currentUserId === null) {
+      return null;
+    }
+
+    const reservation = reservations.find(item => this.getReservationUserId(item) === currentUserId) ?? null;
+    return reservation ? this.getReservationId(reservation) : null;
   }
 
   private sortSeats(seats: any[]): any[] {

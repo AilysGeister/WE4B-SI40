@@ -31,7 +31,8 @@ describe('ChooseSeatsComponent', () => {
             getProgramme: () => of({ id: 1, date: new Date().toISOString(), film: { title: 'Film', price: 10 }, room: { id: 1 } }),
             getRoomSeats: () => of([]),
             getSeat: () => of({}),
-            createReservation: () => of({})
+            createReservation: () => of({}),
+            updateReservation: () => of({})
           }
         }
       ]

@@ -33,4 +33,8 @@ export class ReservationService {
   createReservation(data: Record<string, unknown>): Observable<any> {
     return this.http.post<any>(`${this.BASE_URL}/reservation/create`, data);
   }
+
+  updateReservation(reservationId: number, data: { seatIds: number[] }): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/reservation/update/${reservationId}`, data);
+  }
 }

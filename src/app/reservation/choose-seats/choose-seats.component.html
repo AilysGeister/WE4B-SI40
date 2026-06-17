@@ -5,7 +5,7 @@
       <h1>Choisissez votre place</h1>
       <p class="subtitle">
         Séance du <strong>{{ getFormattedDate() }}</strong> à <strong>{{ getFormattedTime() }}</strong>
-        pour <strong>"{{ programme?.film?.title }}"</strong>
+        pour <strong>"{{ film?.title || programme?.film?.title || '' }}"</strong>
       </p>
     </div>
 
