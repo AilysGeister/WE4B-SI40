@@ -1,0 +1,14 @@
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+a {
+  color: #f5a22c;
+  text-decoration: none;
+}

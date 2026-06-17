@@ -1,0 +1,34 @@
+<div class="vertical">
+  <h2>Commentaires :</h2>
+
+  <ng-container *ngIf="currentUser$ | async as currentUser; else guestCommentView">
+    <app-new-comment
+      *ngIf="currentUser"
+      [filmId]="filmId"
+      (created)="onCommentCreated($event)">
+    </app-new-comment>
+
+    <div *ngIf="comments.length > 0; else noComments">
+      <app-comment
+        *ngFor="let item of comments"
+        [comment]="item"
+        [currentUser]="currentUser"
+        (deleted)="onCommentDeleted($event)">
+      </app-comment>
+    </div>
+  </ng-container>
+
+  <ng-template #guestCommentView>
+    <div *ngIf="comments.length > 0; else noComments">
+      <app-comment
+        *ngFor="let item of comments"
+        [comment]="item"
+        (deleted)="onCommentDeleted($event)">
+      </app-comment>
+    </div>
+  </ng-template>
+
+  <ng-template #noComments>
+    <em>Aucun commentaire pour le moment.</em>
+  </ng-template>
+</div>

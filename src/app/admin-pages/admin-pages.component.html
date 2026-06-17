@@ -1,0 +1,6 @@
+<ng-container *ngIf="currentUser$ | async as currentUser">
+  <app-admin-menu [currentUser]="currentUser"></app-admin-menu>
+  <section class="vertical">
+    <router-outlet></router-outlet>
+  </section>
+</ng-container>

@@ -1,0 +1,40 @@
+<div class="vertical">
+  <h1>{{ film.title }}</h1>
+  <div class="film-show">
+    <div class="film-show-side">
+      <img [src]="BASE_URL + film.coverPath" alt="Affiche du film {{ film.title }}"/>
+      <table>
+        <tr *ngIf="film.genres">
+          <th>Genres</th>
+          <td *ngFor="let genre of film.genres">
+            {{ genre.name }}
+          </td>
+        </tr>
+        <tr *ngIf="film.duration">
+          <th>Durée</th>
+          <td>{{ film.getFormatedDuration() }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="vertical film-personalities">
+      <h2>Description:</h2>
+      <p>{{ film.description }}</p>
+
+      <h2>Réalisateurs:</h2>
+      <ul *ngIf="film.directors?.length != 0 ; else noOne">
+        <li *ngFor="let director of film.directors"><a>{{ director.getFullname() }}</a></li>
+      </ul>
+
+      <h2>Acteurs:</h2>
+      <ul *ngIf="film.actors?.length != 0; else noOne">
+        <li *ngFor="let actor of film.actors"><a>{{ actor.getFullname() }}</a></li>
+      </ul>
+
+      <ng-template #noOne><p>Non renseigné</p></ng-template>
+    </div>
+  </div>
+
+  <hr/>
+  <app-comment-area [comments]="film.visibleComments" [filmId]="film.id"></app-comment-area>
+</div>

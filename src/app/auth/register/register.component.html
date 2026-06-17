@@ -1,0 +1,49 @@
+<div class="form-register m-auto">
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <img class="mb-4" src="assets/images/logo.png" alt="" width="72" height="57">
+    <h1 class="h3 mb-3 fw-normal">Entrez vos imformations</h1>
+    <p class="text-danger">{{ message }}</p>
+
+    <div class="form-floating mb-1">
+      <input type="text" class="form-control" id="floatingFirstname" placeholder="Jane" formControlName="firstname" minlength="3" maxlength="50">
+      <label for="floatingFirstname">Prénom</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="text" class="form-control" id="floatingLastname" placeholder="Doe" formControlName="lastname" minlength="3" maxlength="50">
+      <label for="floatingLastname">Nom</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="text" class="form-control" id="floatingUsername" placeholder="Supa Jeny" formControlName="username" minlength="3" maxlength="50">
+      <label for="floatingUsername">Nom d'utilisateur</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="date" class="form-control" id="floatingBirthdate" formControlName="birthdate">
+      <label for="floatingBirthdate">Date de naissance</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="file" class="form-control" id="floatingPhoto" formControlName="photo" (change)='onFileChange($event)'>
+      <label for="floatingPhoto">Photo</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="email" class="form-control" id="floatingEmail" placeholder="nom@exemple.fr" formControlName="email">
+      <label for="floatingEmail">Adresse Email</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Mot de passe" formControlName="password" minlength="6" maxlength="255">
+      <label for="floatingPassword">Mot de passe</label>
+    </div>
+
+    <div class="form-floating mb-1">
+      <input type="password" class="form-control" id="floatingConfirmPassword" placeholder="Mot de passe" formControlName="confirmPassword" minlength="6" maxlength="255">
+      <label for="floatingConfirmPassword">Confimer le mot de passe</label>
+    </div>
+
+    <input class="btn btn-lg btn-primary w-100" type="submit" [disabled]="registerForm.invalid" value="Inscription"/>
+  </form>
+</div>

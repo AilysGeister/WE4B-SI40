@@ -1,0 +1,20 @@
+<div class="card" *ngIf="currentUser$ | async as currentUser; else anonymousUser">
+  <div class="card-header">
+    <div class="round-con-success"></div>Vous êtes connecté en temps que:
+  </div>
+  <div class="card-body">
+    <img class="card-img" [src]="currentUser.person?.photo ? BASE_URL + 'resources/images/profil_pictures/' + currentUser.person?.photo : BASE_URL + 'resources/images/profil_pictures/default.png'" alt="photo de profile"/>
+    <div>
+      <h1>{{ currentUser.username }}</h1>
+      <h2>{{ currentUser.getFullName()}}</h2>
+    </div>
+  </div>
+  <div class="card-footer">
+    {{ currentUser.getHighestRole() }}
+  </div>
+</div>
+<ng-template #anonymousUser>
+  <div class="card-header">
+    <div class="round-con-failure"></div>Vous êtes actuellement déconnecté.
+  </div>
+</ng-template>

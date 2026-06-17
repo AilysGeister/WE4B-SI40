@@ -1,0 +1,15 @@
+.new-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  padding: 1em;
+  border-top: 0.5em solid #1d3043;
+  border-left: 0.5em solid #354a5f;
+  border-right: 0.5em solid #354a5f;
+  border-bottom: 0.5em solid #354a5f;
+
+  textarea {
+    resize: none;
+
+  }
+}
