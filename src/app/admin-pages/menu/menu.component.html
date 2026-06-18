@@ -7,16 +7,16 @@
   <div *ngIf="isModerator()">
     <strong><img src="assets/icons/dashboard/chat.svg" alt="icone commentaire"> Commentaires</strong>
     <ul>
-      <li><a routerLink="/tools/reports/active">Derniers signalements</a></li>
-      <li><a routerLink="/tools/reports">Tous les signalements</a></li>
-      <li><a routerLink="/tools/comments">Tous les commentaires</a></li>
+      <li><a [routerLink]="['reports','active']">Derniers signalements</a></li>
+      <li><a [routerLink]="['reports']">Tous les signalements</a></li>
+      <li><a [routerLink]="['comments']">Tous les commentaires</a></li>
     </ul>
   </div>
   <div *ngIf="isFundManager()">
     <strong><img src="assets/icons/dashboard/watching.svg" alt="icone film"> Gestion des Films</strong>
     <ul>
       <li><a>Films & Genres</a></li>
-      <li><a>Films à l'affiche</a></li>
+      <li><a [routerLink]="['pined-films']">Films à l'affiche</a></li>
       <li><a>Programmations</a></li>
       <li><a>Salles</a></li>
       <li><a>Langues</a></li>

@@ -16,6 +16,7 @@ import {DashboardComponent} from "./admin-pages/dashboard/dashboard.component";
 import {ReportsListComponent} from "./admin-pages/reports/reports-list/reports-list.component";
 import {CommentsComponent} from "./admin-pages/comments/comments.component";
 import {PersonalityComponent} from "./personality/personality.component";
+import {PinedFilmsComponent} from "./admin-pages/films/pined-films/pined-films.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'reports/active', component: LastReportsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       { path: 'report/:id', component: ReportComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'comments', component: CommentsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'Role_MODERATOR']}},
+      {path: 'pined-films', component: PinedFilmsComponent, data: {expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
     ]
   },
   {path: 'search/:query', component: SearchComponent},

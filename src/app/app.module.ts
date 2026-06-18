@@ -15,7 +15,6 @@ import { CommentComponent } from './comments/comment/comment.component';
 import { NewCommentComponent } from './comments/new-comment/new-comment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPagesComponent } from './admin-pages/admin-pages.component';
-import { FilmsComponent } from './admin-pages/films/films.component';
 import { MenuComponent } from './admin-pages/menu/menu.component';
 import { UserCardComponent } from './auth/user-card/user-card.component';
 import { AuthInterceptor } from "./auth/auth.interceptor";
@@ -30,6 +29,8 @@ import { CommentsComponent } from './admin-pages/comments/comments.component';
 import { DashboardComponent } from './admin-pages/dashboard/dashboard.component';
 import { ReportsListComponent } from './admin-pages/reports/reports-list/reports-list.component';
 import { PersonalityComponent } from './personality/personality.component';
+import { PinedFilmsComponent } from './admin-pages/films/pined-films/pined-films.component';
+import { SearchFilmComponent } from './film/search-film/search-film.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,6 @@ import { PersonalityComponent } from './personality/personality.component';
     NewCommentComponent,
     FilmListComponent,
     AdminPagesComponent,
-    FilmsComponent,
     MenuComponent,
     UserCardComponent,
     HelpCardComponent,
@@ -58,6 +58,8 @@ import { PersonalityComponent } from './personality/personality.component';
     DashboardComponent,
     ReportsListComponent,
     PersonalityComponent,
+    PinedFilmsComponent,
+    SearchFilmComponent,
   ],
   imports: [
     BrowserModule,

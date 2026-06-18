@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Film} from "src/models/film.model";
+import {PinedFilm} from "../../../models/pinedFilm.model";
 
 @Component({
   selector: 'app-film-carousel',
@@ -8,7 +9,9 @@ import {Film} from "src/models/film.model";
 })
 export class FilmCarouselComponent implements OnInit {
 
-  pinnedFilms: Film[] = [];
+  @Input() pinnedFilms: PinedFilm[] = [];
+
+  BASE_URL = "http://localhost:8000/resources/images/films_cover/";
 
   constructor() {}
 
