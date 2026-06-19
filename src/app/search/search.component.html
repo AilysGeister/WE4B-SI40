@@ -9,7 +9,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let film of films">
-        <td class="imagePreview"><a routerLink="/film/{{ film.slug }}"><img class="imagePreview" src="{{ BASE_URL + 'films_cover/' + film.cover_path }}" alt="Affiche du film {{ film.title }}."/> {{ film.title }}</a></td>
+        <td class="imagePreview"><a [routerLink]="['/film', film.slug]"><img class="imagePreview" src="{{ BASE_URL + 'films_cover/' + film.cover_path }}" alt="Affiche du film {{ film.title }}."/> {{ film.title }}</a></td>
       </tr>
       </tbody>
     </table>
@@ -23,7 +23,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let personality of personalities">
-          <td class="imagePreview"><a routerLink="/personality/{{ personality.id }}"><img src="{{ BASE_URL + 'profil_pictures/' +personality.photo }}" alt="Photo de {{ personality.firstname + ' ' + personality.lastname }}."/> {{ personality.firstname + ' ' + personality.lastname }}</a></td>
+          <td class="imagePreview"><a [routerLink]="['/personality', personality.id]"><img src="{{ BASE_URL + 'profil_pictures/' +personality.photo }}" alt="Photo de {{ personality.firstname + ' ' + personality.lastname }}."/> {{ personality.firstname + ' ' + personality.lastname }}</a></td>
         </tr>
       </tbody>
     </table>

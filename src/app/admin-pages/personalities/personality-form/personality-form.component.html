@@ -1,0 +1,33 @@
+<h1>{{ title }}</h1>
+<form [formGroup]="personalityForm" (ngSubmit)="onSubmit()">
+  <p [className]="'text-' + typeResponse">{{ message }}</p>
+
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="floatingFirstname" formControlName="firstname" minlength="3" maxlength="50">
+    <label for="floatingFirstname">Prénom</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="floatingLastname" formControlName="lastname" minlength="3" maxlength="50">
+    <label for="floatingLastname">Nom</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="date" class="form-control" id="floatingBirthdate" formControlName="birthdate">
+    <label for="floatingBirthdate">Date de naissance</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="file" class="form-control" id="floatingPhoto" formControlName="photo" (change)='onFileChange($event)'>
+    <label for="floatingPhoto">Photo</label>
+  </div>
+
+  <div class="form-check mb-1" *ngIf="isEditMode">
+    <input class="form-check-input" type="checkbox" id="deletePhoto" formControlName="deletePhoto"/>
+    <label class="form-check-label" for="deletePhoto">Supprimer</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="submit" class="btn btn-primary" value="Valider" [disabled]="personalityForm.invalid">
+  </div>
+</form>

@@ -1,5 +1,7 @@
-<h1>Films à la une !</h1>
-<app-film-carousel></app-film-carousel>
+<div *ngIf="pinedFilms.length != 0;">
+  <h1>Films à la une !</h1>
+  <app-film-carousel [pinnedFilms]="pinedFilms"></app-film-carousel>
+</div>
 
 <h1>Films à l'affiche</h1>
-<app-film-slider></app-film-slider>
+<app-film-slider [films]="reservableFilms"></app-film-slider>

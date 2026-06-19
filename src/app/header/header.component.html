@@ -37,7 +37,7 @@
           </div>
         </div>
 
-        <a [routerLink]="['/profile', currentUser.id]" class="round-crop" [style.backgroundImage]="currentUser.person?.photo ? 'url(' + BASE_URL + 'resources/images/profil_pictures/' + currentUser.person?.photo + ')' : 'url(assets/images/profil_pictures/default.png)'">
+        <a [routerLink]="['/profile', currentUser.id]" class="round-crop" [style.backgroundImage]="currentUser.person?.photo ? 'url(' + BASE_URL + currentUser.person?.photo + ')' : 'url(' + BASE_URL + 'default.png)'">
         </a>
         <a routerLink="/basket">
           <i class="bi bi-cart"></i>

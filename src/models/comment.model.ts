@@ -1,4 +1,5 @@
 import {User} from "./user.model";
+import {Film} from "./film.model";
 
 export class Comment {
   id: number = -1;
@@ -8,7 +9,7 @@ export class Comment {
   created_at: Date = new Date();
   updated_at: Date = new Date();
   is_visible: boolean = true;
-  film_id?: number;
+  film: Film = new Film();
   author: User =  new User();
 
   constructor(data?: Partial<Comment>) {
