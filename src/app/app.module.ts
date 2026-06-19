@@ -10,15 +10,12 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
-// import { CommentAreaComponent } from './comments/comment-area/comment-area.component';
-// import { CommentComponent } from './comments/comment/comment.component';
-// import { NewCommentComponent } from './comments/new-comment/new-comment.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AdminPagesComponent } from './admin-pages/admin-pages.component';
 import { MenuComponent } from './admin-pages/menu/menu.component';
 import { UserCardComponent } from './auth/user-card/user-card.component';
 import { AuthInterceptor } from "./auth/auth.interceptor";
-// import { HelpCardComponent } from './admin-pages/help-card/help-card.component';
+import { HelpCardComponent } from './admin-pages/help-card/help-card.component';
 import { FilmComponent } from './film/film/film.component';
 import { FilmCardComponent } from './film/film-card/film-card.component';
 import { FilmListComponent } from './film/film-list/film-list.component';
@@ -27,7 +24,6 @@ import { CommentAreaComponent } from './comments/comment-area/comment-area.compo
 import { CommentComponent } from './comments/comment/comment.component';
 import { NewCommentComponent } from './comments/new-comment/new-comment.component';
 import { BasketComponent } from './basket/basket.component';
-// import { SearchComponent } from './search/search.component';
 import { SearchComponent } from './search/search.component';
 import { LastReportsComponent } from './admin-pages/reports/last-reports/last-reports.component';
 import { ReportComponent } from './admin-pages/reports/report/report.component';
@@ -53,14 +49,11 @@ import { PersonalitiesListComponent } from './admin-pages/personalities/personal
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    // CommentAreaComponent,
-    // CommentComponent,
-    // NewCommentComponent,
     FilmListComponent,
     AdminPagesComponent,
     MenuComponent,
     UserCardComponent,
-    // HelpCardComponent,
+    HelpCardComponent,
     FilmComponent,
     FilmCardComponent,
     ChooseSeatsComponent,
@@ -68,7 +61,6 @@ import { PersonalitiesListComponent } from './admin-pages/personalities/personal
     CommentAreaComponent,
     CommentComponent,
     NewCommentComponent,
-    // SearchComponent,
     SearchComponent,
     LastReportsComponent,
     ReportComponent,

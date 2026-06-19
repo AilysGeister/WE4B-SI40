@@ -54,6 +54,7 @@ const routes: Routes = [
   },
   {path: 'search/:query', component: SearchComponent},
   {path: 'reservation/choose-seats/:programmeId', component: ChooseSeatsComponent},
+  {path: 'basket', component: BasketComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

@@ -31,18 +31,26 @@ export class FilmService {
     );
   }
 
+  /**
+   * Récupère le JSON d'un film unique de l'API grâce à son identifiant.
+   * @param slug Slug du film à charger.
+   */
   getFilmById(id: number): Observable<Film> {
     return this.http.get<any>(this.BASE_URL + id).pipe(
       map((json: any) => new Film(json))
     );
   }
 
+  /**
+   * Récupèration des programmes par films.
+   * @param id
+   */
   getProgrammesByFilmId(id: number): Observable<any[]> {
     return this.http.get<any[]>(`${this.BASE_URL}${id}/programmes`);
   }
 
   /**
-   * Récuperation de tout les films en JSON.
+   * Récuperation de tous les films en JSON.
    */
   getAllFilms(): Observable<Film[]> {
     return this.http.get<any[]>(this.BASE_URL).pipe(

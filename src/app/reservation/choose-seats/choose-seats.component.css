@@ -1,10 +1,6 @@
 .reservation-page {
   min-height: 100vh;
   padding: 2rem clamp(1rem, 2.5vw, 2rem) 3rem;
-  background:
-    radial-gradient(circle at top left, rgba(245, 162, 44, 0.14), transparent 34%),
-    radial-gradient(circle at top right, rgba(245, 162, 44, 0.06), transparent 26%),
-    linear-gradient(180deg, #fefefe 0%, #f7f7f7 45%, #f2f2f2 100%);
   color: #222;
 }
 
@@ -102,7 +98,7 @@
   padding: 0.85rem 1rem;
   text-align: center;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(245, 162, 44, 0.08), rgba(255, 255, 255, 0.95), rgba(245, 162, 44, 0.08));
+  background: rgba(245, 162, 44, 0.08);
   color: #555;
   letter-spacing: 0.12em;
   text-transform: uppercase;
