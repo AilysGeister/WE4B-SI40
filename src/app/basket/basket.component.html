@@ -1,0 +1,97 @@
+<div class="basket-page">
+  <h1>Contenu du panier</h1>
+
+  <div *ngIf="loading" class="state-panel">Chargement du panier...</div>
+  <div *ngIf="!loading && error" class="state-panel state-error">{{ error }}</div>
+  <div *ngIf="!loading && successMessage" class="state-panel state-success">{{ successMessage }}</div>
+
+  <ng-container *ngIf="!loading && !error">
+    <div *ngIf="reservations.length > 0; else emptyBasket" class="basket-table-wrap">
+      <table class="table table-striped basket-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="center-content">Titre du film</th>
+            <th>Date</th>
+            <th>Horaire</th>
+            <th>Places</th>
+            <th>Prix</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let reservation of reservations; trackBy: trackByReservationId">
+            <td class="imagePreview">
+              <img [src]="[coverBaseUrl + reservation.programme.film.coverPath]" alt="Affiche du film {{ reservation.programme.film.title }}"/>
+            </td>
+            <td class="column-wrap">{{ reservation.programme?.film?.title }}</td>
+            <td class="column-wrap">{{ getReservationDate(reservation) }}</td>
+            <td class="column-wrap">{{ getReservationTimeRange(reservation) }}</td>
+            <td class="column-wrap">
+              Première classe :
+              <select
+                [name]="'firstClass-' + reservation.id"
+                class="form-select w-auto d-inline-block"
+                [ngModel]="firstClassSelections[reservation.id]"
+                (ngModelChange)="onFirstClassChange(reservation, $event)">
+                <option *ngFor="let option of quantityOptions" [ngValue]="option">{{ option }}</option>
+              </select>
+              <br />
+              Seconde classe :
+              <select
+                [name]="'secondClass-' + reservation.id"
+                class="form-select w-auto d-inline-block"
+                [ngModel]="secondClassSelections[reservation.id]"
+                (ngModelChange)="onSecondClassChange(reservation, $event)">
+                <option *ngFor="let option of quantityOptions" [ngValue]="option">{{ option }}</option>
+              </select>
+            </td>
+            <td>
+              <ng-container *ngIf="reservation.firstClassCount !== 0">
+                {{ reservation.firstClassCount }} x {{ reservation.firstClassUnitPrice.toFixed(2) }}€<br />
+              </ng-container>
+              <ng-container *ngIf="reservation.secondClassCount !== 0">
+                {{ reservation.secondClassCount }} x {{ reservation.secondClassUnitPrice.toFixed(2) }}€<br />
+              </ng-container>
+              <br /><br /><br />
+              Total : {{ reservation.total.toFixed(2) }}€
+            </td>
+            <td>
+              <div class="d-flex justify-content-evenly">
+                <button class="btn btn-danger" type="button" (click)="deleteReservation(reservation.id)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td>
+              Total du panier :<br />
+              {{ getTotalBasket().toFixed(2) }}€
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button class="btn btn-primary" type="button" (click)="openPayDialog()">Payer</button>
+    </div>
+
+    <ng-template #emptyBasket>
+      <em>Votre panier est vide.</em>
+    </ng-template>
+  </ng-container>
+
+  <div class="payment-overlay" *ngIf="showPayDialog" (click)="closePayDialog()"> //Si l'user clique sur payer on affiche une confirmation
+    <div class="payment-dialog" (click)="$event.stopPropagation()">
+      <h2>Payer le panier</h2>
+      <p>
+        Confirmer le paiement de votre panier pour un total de
+        <strong>{{ getTotalBasket().toFixed(2) }}€</strong> ?
+      </p>
+      <div class="payment-actions">
+        <button class="btn btn-outline-secondary" type="button" (click)="closePayDialog()">Annuler</button>
+        <button class="btn btn-primary" type="button" (click)="payBasket()">Payer</button>
+      </div>
+    </div>
+  </div>
+</div>

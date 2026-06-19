@@ -1,0 +1,95 @@
+.basket-page {
+  padding-top: 0;
+}
+
+.basket-table-wrap {
+  display: block;
+}
+
+.basket-table {
+  width: 100%;
+  margin-bottom: 1rem;
+  vertical-align: middle;
+}
+
+.center-content {
+  text-align: center;
+}
+
+.column-wrap {
+  white-space: normal;
+  vertical-align: middle;
+}
+
+.imagePreview {
+  width: 6em;
+}
+
+.imagePreview img {
+  width: 5em;
+  height: auto;
+  display: block;
+}
+
+.imagePreview-empty {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5em;
+  min-height: 7.5em;
+  color: #666;
+}
+
+.basket-table select {
+  display: inline-block;
+}
+
+.state-panel {
+  padding: 1rem 1.2rem;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.state-error {
+  color: #a93b3b;
+  background: rgba(217, 72, 72, 0.08);
+  border-color: rgba(217, 72, 72, 0.18);
+}
+
+.state-success {
+  color: #166534;
+  background: rgba(40, 167, 69, 0.08);
+  border-color: rgba(40, 167, 69, 0.18);
+}
+
+.payment-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(17, 24, 39, 0.58);
+  z-index: 1050;
+}
+
+.payment-dialog {
+  width: min(520px, 100%);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
+}
+
+.payment-dialog h2 {
+  margin-top: 0;
+}
+
+.payment-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
