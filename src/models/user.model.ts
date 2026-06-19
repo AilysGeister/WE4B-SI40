@@ -9,6 +9,7 @@ export class User {
   public roles: string[] = ["VISITOR"];
   public password: string = "";
   public person: Person = new Person();
+  public basket?: any;
   public visibleComments: Comment[] = [];
 
   public getHighestRole(): string {
