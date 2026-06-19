@@ -11,6 +11,7 @@ import {AdminGuard} from "./admin-pages/admin.guard";
 import {AuthGuard} from "./auth/auth.guard";
 import {GuestGuard} from "./auth/guest.guard";
 import {ChooseSeatsComponent} from "./reservation/choose-seats/choose-seats.component";
+import {BasketComponent} from "./basket/basket.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
   {path: 'film', component: FilmListComponent},
   {path: 'film/:slug', component: FilmComponent},
+  {path: 'basket', component: BasketComponent, canActivate: [AuthGuard]},
   {path: 'tools', component: AdminPagesComponent, canActivate: [AdminGuard], data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR']}, children: [
 
     ]},

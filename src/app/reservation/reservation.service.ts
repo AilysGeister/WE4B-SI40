@@ -27,6 +27,18 @@ export class ReservationService {
     return this.http.get<any>(`${this.BASE_URL}/programme/${programmeId}/reservations`);
   }
 
+  getReservation(reservationId: number): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/reservation/${reservationId}`);
+  }
+
+  getBasket(): Observable<any> {
+    return this.http.get<any>(`${this.BASE_URL}/basket`);
+  }
+
+  createBasket(): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/basket/create`, {});
+  }
+
   /**
    * Crée une nouvelle réservation
    */
@@ -34,7 +46,19 @@ export class ReservationService {
     return this.http.post<any>(`${this.BASE_URL}/reservation/create`, data);
   }
 
-  updateReservation(reservationId: number, data: { seatIds: number[] }): Observable<any> {
+  updateReservation(reservationId: number, data: Record<string, unknown>): Observable<any> {
     return this.http.post<any>(`${this.BASE_URL}/reservation/update/${reservationId}`, data);
+  }
+
+  updateBasketReservation(reservationId: number, data: Record<string, unknown>): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/reservation/update/${reservationId}`, data);
+  }
+
+  deleteReservation(reservationId: number): Observable<any> {
+    return this.http.delete<any>(`${this.BASE_URL}/reservation/delete/${reservationId}`);
+  }
+
+  payBasket(): Observable<any> {
+    return this.http.post<any>(`${this.BASE_URL}/basket/pay`, {});
   }
 }

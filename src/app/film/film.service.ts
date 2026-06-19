@@ -36,6 +36,10 @@ export class FilmService {
     );
   }
 
+  getProgrammesByFilmId(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.BASE_URL}${id}/programmes`);
+  }
+
   getAllFilms(): Observable<Film[]> {
     return this.http.get<any[]>(this.BASE_URL).pipe(
       map((jsonArray: any[]) => {

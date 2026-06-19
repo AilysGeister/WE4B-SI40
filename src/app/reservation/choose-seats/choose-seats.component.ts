@@ -81,20 +81,20 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
     this.reservationService.getProgramme(this.programmeId).pipe(
       switchMap(programme => {
         this.programme = programme;
-        const filmId = Number(programme?.film?.id ?? programme?.film);
+        const filmSlug = this.getProgrammeFilmSlug(programme);
         const roomId = Number(programme?.room?.id ?? programme?.room);
         if (!roomId || Number.isNaN(roomId)) {
           throw new Error('La salle associée au programme est introuvable.');
         }
 
-        if (!filmId || Number.isNaN(filmId)) {
-          throw new Error('Le film associé au programme est introuvable.');
+        if (!filmSlug) {
+          throw new Error('Le slug du film associé au programme est introuvable.');
         }
 
         this.room = programme.room ?? null;
 
         return forkJoin({
-          film: this.filmService.getFilmById(filmId),
+          film: this.filmService.getFilmBySlug(filmSlug),
           seatsResponse: this.reservationService.getRoomSeats(roomId),
           reservationsResponse: this.reservationService.getProgrammeReservations(this.programmeId)
         }).pipe(
@@ -257,6 +257,12 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
     }
 
     return 'available';
+  }
+
+  private getProgrammeFilmSlug(programme: any): string | null {
+    const candidate = programme?.film?.slug ?? programme?.filmSlug ?? programme?.film_slug ?? programme?.slug;
+    const slug = typeof candidate === 'string' ? candidate.trim() : '';
+    return slug.length > 0 ? slug : null;
   }
 
   getSeatTone(seat: any): string {

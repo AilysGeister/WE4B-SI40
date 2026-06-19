@@ -24,6 +24,10 @@ import { FilmComponent } from './film/film/film.component';
 import { FilmCardComponent } from './film/film-card/film-card.component';
 import { FilmListComponent } from './film/film-list/film-list.component';
 import { ChooseSeatsComponent } from './reservation/choose-seats/choose-seats.component';
+import { CommentAreaComponent } from './comments/comment-area/comment-area.component';
+import { CommentComponent } from './comments/comment/comment.component';
+import { NewCommentComponent } from './comments/new-comment/new-comment.component';
+import { BasketComponent } from './basket/basket.component';
 // import { SearchComponent } from './search/search.component';
 
 @NgModule({
@@ -47,6 +51,10 @@ import { ChooseSeatsComponent } from './reservation/choose-seats/choose-seats.co
     FilmComponent,
     FilmCardComponent,
     ChooseSeatsComponent,
+    BasketComponent,
+    CommentAreaComponent,
+    CommentComponent,
+    NewCommentComponent,
     // SearchComponent,
   ],
   imports: [

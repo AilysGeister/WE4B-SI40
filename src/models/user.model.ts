@@ -8,6 +8,7 @@ export class User {
   public roles: string[] = ["VISITOR"];
   public password: string = "";
   public person: Person = new Person();
+  public basket?: any;
 
   public getHighestRole(): string {
     if (!this.roles || this.roles.length === 0) {
