@@ -1,22 +1,33 @@
 <div class="row">
-  <p>Résultats pour: {{ query }}</p>
+  <p>Résultats pour: "<strong>{{ query }}</strong>"</p>
 
   <div class="col-md-6 col-sm-12">
     <h1>Films</h1>
-    <table class="table table-striped" *ngif="films.length != 0; else noResult">
-      <tr><th>Titre</th></tr>
+    <table class="table table-striped" *ngIf="films.length != 0; else noResult">
+      <thead>
+        <tr><th>Titre</th></tr>
+      </thead>
+      <tbody>
       <tr *ngFor="let film of films">
-        <td><a><img class="imagePreview" src="assets/images/film_cover/{{ film.cover_path }}" alt="Affiche du film {{ film.title }}."/>{{ film.title }}</a></td>
+        <td class="imagePreview"><a [routerLink]="['/film', film.slug]"><img class="imagePreview" src="{{ BASE_URL + 'films_cover/' + film.cover_path }}" alt="Affiche du film {{ film.title }}."/> {{ film.title }}</a></td>
       </tr>
+      </tbody>
     </table>
-
-    <table class="table table-striped" *ngif="personalities.length != 0; else noResult">
-      <tr><td>Nom</td></tr>
-      <tr *ngFor="let personality of personalities">
-        <td><a><img src="assets/images/profil_pictures/{{ personality.picture_path }}" alt="Photo de {{ personality.name }}."/>{{ personality.name }}</a></td>
-      </tr>
-    </table>
-
-    <ng-template #noResult><em>Aucun résultat ne correspond à votre recherche.</em></ng-template>
   </div>
+
+  <div class="col-md-6 col-sm-12">
+    <h1>Personnalitées</h1>
+    <table class="table table-striped" *ngIf="personalities.length != 0; else noResult">
+      <thead>
+        <tr><td>Nom</td></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let personality of personalities">
+          <td class="imagePreview"><a [routerLink]="['/personality', personality.id]"><img src="{{ BASE_URL + 'profil_pictures/' +personality.photo }}" alt="Photo de {{ personality.firstname + ' ' + personality.lastname }}."/> {{ personality.firstname + ' ' + personality.lastname }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <ng-template #noResult><em>Aucun résultat ne correspond à votre recherche.</em></ng-template>
 </div>

@@ -1,0 +1,12 @@
+<div class="search-container">
+  <label for="search">Rechercher un film :</label>
+  <div class="form-control">
+    <input id="search" type="text" [formControl]="searchControl" placeholder="Chercher un titre" required/>
+    <button *ngIf="filmSelectionne" (click)="reset()" class="btn btn-outline-danger">X</button>
+  </div>
+
+  <ul class="results-list" *ngIf="!filmSelectionne && (films$ | async) as films">
+    <li *ngFor="let film of films" (click)="select(film)">{{ film.title }}</li>
+    <li *ngIf="films.length === 0 && searchControl.value">Aucun film trouvé</li>
+  </ul>
+</div>

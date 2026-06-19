@@ -10,6 +10,8 @@ import { LoginService } from '../login/login.service';
 })
 export class UserCardComponent implements OnInit {
 
+  BASE_URL = 'http://localhost:8000/';
+
   currentUser$: Observable<User | null> = this.loginService.currentUser$;
 
   constructor(private loginService: LoginService) { }

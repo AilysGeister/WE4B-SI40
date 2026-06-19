@@ -1,0 +1,29 @@
+<div class="horizontal">
+  <h1>Utilisateurs</h1><a class="btn btn-primary" [routerLink]="['new']">Nouvel utilisateur</a>
+</div>
+<div>
+  <table *ngIf="users.length != 0; else noUser" class="table table-striped">
+    <thead>
+      <tr><th>ID</th><th>Prénom</th><th>Nom</th><th>Surnom</th><th>Email</th><th>Inscris-le</th><th>Dernière Modification</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.person.firstname }}</td>
+        <td>{{ user.person.lastname }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.person.created_at|date:'dd/MM/yyyy hh:mm':'UTC +1' }}</td>
+        <td>{{ user.person.updated_at|date:'dd/MM/yyyy hh:mm':'UTC +1' }}</td>
+        <td>
+          <div class="d-flex justify-content-evenly">
+            <a class="btn btn-primary" [routerLink]="['/profile', user.id]">Voir</a>
+            <a class="btn btn-primary" [routerLink]="['edit', user.id]" id="edit" >Éditer</a>
+            <button class="btn btn-danger" (click)="onDelete(user.id)">Supprimer</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noUser><em>Aucun utilisateur à afficher.</em></ng-template>
+</div>

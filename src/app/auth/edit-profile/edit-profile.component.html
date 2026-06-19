@@ -1,0 +1,82 @@
+<div class="row person-edit">
+  <div class="col-md-3 col-sm-12 form-edit">
+    <h2>Photo de profile</h2>
+    <div class="center"><img class="person-picture" [src]="BASE_URL + (profile.person.photo ? profile.person.photo : 'default.png')" alt="Image de profile"/></div>
+    <form [formGroup]="photoForm" class="vertical" (ngSubmit)="onPhotoFormSubmit()">
+      <p [className]="'text-' + typeResponse">{{ messagePhoto }}</p>
+      <label for="floatingPhoto">Photo</label>
+      <input type="file" class="form-control" id="floatingPhoto" formControlName="photo" (change)='onFileChange($event)'>
+      <div>
+        <input type="checkbox" id="deletePhoto" formControlName="deletePhoto"/>
+        <label for="deletePhoto">Supprimer</label>
+      </div>
+      <div><input type="submit" value="Modifier ma photo" class="btn btn-primary"/></div>
+    </form>
+  </div>
+
+  <div class="col-md-8 col-sm-12">
+    <h2>Informations personnelles</h2>
+    <form [formGroup]="personalDataForm" class="vertical" (ngSubmit)="onPersonalDataFormSubmit()">
+      <p [className]="'text-' + typeResponse">{{ messagePersonalDatas }}</p>
+      <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="floatingFirstname" formControlName="firstname" minlength="3" maxlength="50">
+        <label for="floatingFirstname">Prénom</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="floatingLastname" formControlName="lastname" minlength="3" maxlength="50">
+        <label for="floatingLastname">Nom</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="text" class="form-control" id="floatingUsername" formControlName="username" minlength="3" maxlength="50">
+        <label for="floatingUsername">Nom d'utilisateur</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="date" class="form-control" id="floatingBirthdate" formControlName="birthdate">
+        <label for="floatingBirthdate">Date de naissance</label>
+      </div>
+      <div>
+        <input type="submit" class="btn btn-primary" value="Modifier mes informations">
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-5 col-sm-12">
+    <h2>Adresse Email</h2>
+    <form [formGroup]="emailForm" class="vertical" (ngSubmit)="onEmailFormSubmit()">
+      <p [className]="'text-' + typeResponse">{{ messageEmail }}</p>
+      <div class="form-floating mb-1">
+        <input type="email" class="form-control" id="floatingEmail" formControlName="email">
+        <label for="floatingEmail">Email</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="password" class="form-control" id="floatingPasswordEmail" formControlName="passwordEmail">
+        <label for="floatingPasswordEmail">Mot de passe actuel</label>
+      </div>
+      <div>
+        <input type="submit" class="btn btn-primary" value="Modifier mon email" [disabled]="emailForm.invalid">
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-6 col-sm-12">
+    <h2>Mot de passe</h2>
+    <form [formGroup]="passwordForm" (ngSubmit)="onPasswordFormSubmit()">
+      <p [className]="'text-' + typeResponse">{{ messagePassword }}</p>
+      <div class="form-floating mb-1">
+        <input type="password" class="form-control" id="floatingNewPassword" formControlName="newPassword" minlength="6" maxlength="255">
+        <label for="floatingNewPassword">Nouveau mot de passe</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="password" class="form-control" id="floatingConfirmPassword" formControlName="confirmPassword">
+        <label for="floatingConfirmerPassword">Confimer le nouveau mot de passe</label>
+      </div>
+      <div class="form-floating mb-1">
+        <input type="password" class="form-control" id="floatingPasswordNewPassword" formControlName="password">
+        <label for="floatingPasswordNewPassword">Mot de passe actuel</label>
+      </div>
+      <div>
+        <input type="submit" class="btn btn-primary" value="Modifier mon mot de passe" [disabled]="passwordForm.invalid">
+      </div>
+    </form>
+  </div>
+</div>

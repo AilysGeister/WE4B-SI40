@@ -1,4 +1,5 @@
 import {Person} from "./person.model";
+import {Comment} from "./comment.model";
 
 export class User {
 
@@ -9,6 +10,7 @@ export class User {
   public password: string = "";
   public person: Person = new Person();
   public basket?: any;
+  public visibleComments: Comment[] = [];
 
   public getHighestRole(): string {
     if (!this.roles || this.roles.length === 0) {

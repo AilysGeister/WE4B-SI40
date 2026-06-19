@@ -1,0 +1,12 @@
+<h1>Signalements:</h1>
+<table class="table table-striped" *ngIf="reports.length != 0; else noReports">
+  <thead>
+    <tr><th>ID</th><th>Auteur</th><th>Titre</th><th>Signalements</th><th>Actions</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let report of reports">
+      <td>{{ report.id }}</td><td>{{ report.author }}</td><td>{{ report.title }}</td><td>{{ report.nb_reports }}</td><td><button class="btn btn-primary" (click)="moderate(report.id)">Modérer</button></td>
+    </tr>
+  </tbody>
+</table>
+<ng-template #noReports><em>Aucun signalements actifs.</em></ng-template>

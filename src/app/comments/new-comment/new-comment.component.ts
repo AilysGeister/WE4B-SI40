@@ -35,7 +35,6 @@ export class NewCommentComponent {
    * Créer le nouveau commentaire et vide le formulaire de création.
    */
   onSubmit(): void {
-    //Tant que les champs ne sont pas correct il est impossible de valider le formulaire:
     if (this.formComment.invalid) {
       return;
     }
@@ -52,7 +51,6 @@ export class NewCommentComponent {
       next: (comment) => {
         this.created.emit(comment);
         this.formComment.reset();
-        this.message = "Commentaire publié avec succès !";
       },
       error: (err) => {
         this.message = err.error?.message || "Une erreur est survenue.";

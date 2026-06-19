@@ -14,8 +14,8 @@ export class AdminGuard implements CanActivate, CanActivateChild {
     private router: Router
   ) {}
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-        throw new Error("Method not implemented.");
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    return this.canActivate(childRoute, state);
   }
 
   /**

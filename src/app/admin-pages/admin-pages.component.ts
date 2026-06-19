@@ -1,4 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {Observable} from "rxjs";
+import {User} from "../../models/user.model";
+import {LoginService} from "../auth/login/login.service";
 
 @Component({
   selector: 'app-admin-pages',
@@ -7,7 +10,11 @@ import {Component, OnInit} from '@angular/core';
 })
 export class AdminPagesComponent implements OnInit {
 
-  constructor() { }
+  currentUser$: Observable<User | null> = this.loginService.currentUser$;
+
+  constructor(
+    private loginService: LoginService,
+  ) {}
 
   ngOnInit(): void {
   }

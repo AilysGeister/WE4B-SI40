@@ -1,0 +1,40 @@
+<div>
+  <h1>Films à l'affiche</h1>
+  <form (ngSubmit)="onSubmit()" [formGroup]="newItemForm" class="row">
+    <p class="text-{{ messageType }}">{{ message }}</p>
+    <div class="col-5">
+      <app-search-film (film)="onGetFilm($event)"></app-search-film>
+    </div>
+    <div class="col-5">
+      <label for="position">Position</label>
+      <input type="number" name="postion" class="form-control form-control-sm" placeholder="Position" formControlName="position" min="1" max="{{ this.films.length+1 }}" required>
+    </div>
+    <div class="col-2">
+      <input type="submit" class="btn btn-primary" value="Ajouter">
+    </div>
+  </form>
+</div>
+<div *ngIf="films.length != 0; else noFilm;">
+  <table class="table table-striped">
+    <thead>
+    <tr><th>Film ID</th><th>Titre</th><th>Position</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of films;let i = index">
+      <td>{{ item.film.id }}</td>
+      <td>{{ item.film.title }}</td>
+      <td>{{ item.position }}</td>
+      <td>
+        <div class="d-flex justify-content-evenly">
+          <button *ngIf="i != 0" class="btn btn-primary" (click)="up(item)"><img class="icon" src="assets/icons/dashboard/up-arrow.svg" alt="Monter"/></button>
+          <button *ngIf="i != films.length-1" class="btn btn-primary" (click)="down(item)"><img class="icon" src="assets/icons/dashboard/down-arrow.svg" alt="Descendre"/></button>
+          <button class="btn btn-danger" (click)="delete(item)">Supprimer</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<button class="btn btn-primary" (click)="save()">Sauvegarder</button>
+
+<ng-template #noFilm><em>Aucun film n'est actuellement à l'affiche.</em></ng-template>

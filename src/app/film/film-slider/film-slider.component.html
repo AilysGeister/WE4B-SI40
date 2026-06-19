@@ -1,17 +1,14 @@
 <div class="films-carousel-wrapper" id="allFilmsCarouselWrapper">
-  <button class="carousel-control-prev" aria-label="Scroll left">
+  <button class="carousel-control-prev" aria-label="Scroll left" (click)="scrollLeft()">
     <span class="carousel-control-prev-icon"></span>
   </button>
 
-  <div class="films-carousel-container" id="filmsCarouselContainer">
-    <div *ngFor="let film of films" class="films-carousel" id="filmsCarousel">
-      <a href="" class="film-cover-card">
+  <div class="films-carousel-container" #carouselContainer (wheel)="onWheel($event)">
+    <div class="films-carousel" id="filmsCarousel">
+      <a *ngFor="let film of films" [routerLink]="['/film', film.slug]" class="film-cover-card">
         <div class="film-cover-wrapper">
-          <div class="film-cover-wrapper featured-carousel-cover" *ngIf="film.coverPath; then thenBlock else elseBlock"></div>
-          <ng-template #thenBlock>
-            <img [src]="'assets/films_cover/' + film.coverPath" [alt]="'Affiche du film ' + film.title" class="film-cover-img"/>
-          </ng-template>
-          <ng-template #elseBlock>
+          <img *ngIf="film.coverPath; else noCover" [src]="BASE_URL + film.coverPath" [alt]="'Affiche du film ' + film.title" class="film-cover-img"/>
+          <ng-template #noCover>
             <div class="film-no-cover">No Cover</div>
           </ng-template>
           <div class="film-cover-overlay">
@@ -24,44 +21,7 @@
     </div>
   </div>
 
-  <button class="carousel-control-next" aria-label="Scroll right">
+  <button class="carousel-control-next" aria-label="Scroll right" (click)="scrollRight()">
     <span class="carousel-control-next-icon"></span>
   </button>
 </div>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const wrapper = document.getElementById('allFilmsCarouselWrapper');
-    const carouselContainer = document.getElementById('filmsCarouselContainer');
-    const leftArrow = wrapper.querySelector('.carousel-control-prev');
-    const rightArrow = wrapper.querySelector('.carousel-control-next');
-    const scrollAmount = 400; // pixels to scroll per click
-
-    // Left arrow click
-    leftArrow.addEventListener('click', function() {
-      carouselContainer.scrollBy({
-        left: -scrollAmount,
-        behavior: 'smooth'
-      });
-    });
-
-    // Right arrow click
-    rightArrow.addEventListener('click', function() {
-      carouselContainer.scrollBy({
-        left: scrollAmount,
-        behavior: 'smooth'
-      });
-    });
-
-    // Scroll wheel support
-    carouselContainer.addEventListener('wheel', function(event) {
-      if (event.deltaY !== 0) {
-        event.preventDefault();
-        carouselContainer.scrollBy({
-          left: event.deltaY,
-          behavior: 'smooth'
-        });
-      }
-    });
-  });
-</script>

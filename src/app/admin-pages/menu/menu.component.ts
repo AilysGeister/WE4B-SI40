@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-admin-menu',
@@ -6,6 +6,8 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent implements OnInit {
+
+  @Input() currentUser: any;
 
   isMenuOpen = false;
 
@@ -16,5 +18,17 @@ export class MenuComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  isModerator(): boolean  {
+    return (this.isAdmin() || this.currentUser.getHighestRole() === 'Modérateur');
+  }
+
+  isFundManager(): boolean {
+    return (this.isAdmin() || this.currentUser.getHighestRole() === 'Gestionnaire');
+  }
+
+  isAdmin(): boolean {
+    return this.currentUser.getHighestRole() === 'Administrateur';
   }
 }

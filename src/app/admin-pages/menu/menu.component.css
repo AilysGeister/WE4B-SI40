@@ -15,10 +15,10 @@ ul {
   list-style: none;
 }
 
-aside strong,
-aside a {
+aside strong, aside a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
+  color: inherit;
   font-size: large;
   display: block;
   transition: 0.3s;
@@ -45,7 +45,7 @@ img {
   display: none;
   position: relative;
   top: 1em;
-  z-index: 1050;
+  z-index: 1000;
   flex-direction: column;
   justify-content: space-between;
   width: 26px;

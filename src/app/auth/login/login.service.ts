@@ -94,6 +94,13 @@ export class LoginService {
   }
 
   /**
+   * Renvoie l'utilisateur courant.
+   */
+  public getCurrentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
+
+  /**
    * Enregistre le jeton de connexion dans le stockage de session.
    * @param token
    */
@@ -106,5 +113,17 @@ export class LoginService {
    */
   getToken(): string | null {
     return sessionStorage.getItem(this.TOKEN_KEY);
+  }
+
+  /**
+   * Mets à jour les informations de l'utilisateur.
+   * @param updatedUser
+   */
+  updateCurrentUser(updatedUser: Partial<User>): void {
+    const current = this.currentUserSubject.value;
+    if (current) {
+      const newUser = { ...current, ...updatedUser };
+      this.currentUserSubject.next(newUser as User);
+    }
   }
 }

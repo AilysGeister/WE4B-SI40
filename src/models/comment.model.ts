@@ -1,17 +1,16 @@
+import {User} from "./user.model";
+import {Film} from "./film.model";
+
 export class Comment {
-  id?: number;
+  id: number = -1;
   title: string = '';
   content: string = '';
   note: number = 10;
-  created_at?: Date;
-  updated_at?: Date;
+  created_at: Date = new Date();
+  updated_at: Date = new Date();
   is_visible: boolean = true;
-  film_id?: number;
-  author?: {
-    id: number;
-    username: string;
-    roles: string[];
-  };
+  film: Film = new Film();
+  author: User =  new User();
 
   constructor(data?: Partial<Comment>) {
     if (data) {

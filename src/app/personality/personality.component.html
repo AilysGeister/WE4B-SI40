@@ -1,0 +1,22 @@
+<div class="row person">
+  <div class="col-md-3 col-sm-12 person-info">
+    <img class="" src="{{ BASE_URL + personality.photo }}"
+         alt="Image de profile"/>
+    <div class="">
+      <h1>{{ personality.firstname }} {{ personality.lastname }}</h1>
+      <p>Né le {{ personality.birthdate|date: 'dd/MM/yyyy':'UTC +1' }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-9 col-sm-12">
+    <div *ngIf="this.personality.directedFilms?.length != 0">
+      <h1>Films Réalisés</h1>
+      <app-film-slider [films]="this.personality.directedFilms"></app-film-slider>
+    </div>
+
+    <div *ngIf="this.personality.playedFilms?.length != 0">
+      <h1>Films joués</h1>
+      <app-film-slider [films]="this.personality.playedFilms"></app-film-slider>
+    </div>
+  </div>
+</div>
