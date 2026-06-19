@@ -22,8 +22,7 @@
         <tbody>
           <tr *ngFor="let reservation of reservations; trackBy: trackByReservationId">
             <td class="imagePreview">
-              <!-- TODO IL FAUT QUE METTE LES IMAGES DAFFICHE -->
-              
+              <img [src]="[coverBaseUrl + reservation.programme.film.coverPath]" alt="Affiche du film {{ reservation.programme.film.title }}"/>
             </td>
             <td class="column-wrap">{{ reservation.programme?.film?.title }}</td>
             <td class="column-wrap">{{ getReservationDate(reservation) }}</td>
