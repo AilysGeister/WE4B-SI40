@@ -12,7 +12,7 @@ import { User } from '../../models/user.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  BASE_URL = 'http://localhost:8000/';
+  BASE_URL = "http://localhost:8000/resources/images/profil_pictures/";
 
   currentUser$: Observable<User | null> = this.loginService.currentUser$;
 

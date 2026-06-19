@@ -16,7 +16,7 @@
     <strong><img src="assets/icons/dashboard/watching.svg" alt="icone film"> Gestion des Films</strong>
     <ul>
       <li><a>Films & Genres</a></li>
-      <li><a [routerLink]="['pined-films']">Films à l'affiche</a></li>
+      <li><a [routerLink]="['pined-films']">Films à la une</a></li>
       <li><a>Programmations</a></li>
       <li><a>Salles</a></li>
       <li><a>Langues</a></li>
@@ -25,8 +25,8 @@
   <div *ngIf="isAdmin()">
     <strong><img src="assets/icons/dashboard/group.svg" alt="icone individus"> Gestions des Individus</strong>
     <ul>
-      <li><a>Utilisateurs</a></li>
-      <li><a>Personalités</a></li>
+      <li><a [routerLink]="['users']">Utilisateurs</a></li>
+      <li><a [routerLink]="['personalities']">Personnalités</a></li>
     </ul>
   </div>
 </aside>

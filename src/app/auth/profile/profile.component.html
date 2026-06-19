@@ -1,0 +1,60 @@
+<div class="row person">
+  <div class="col-md-3 col-sm-12 person-info">
+    <img class="person-picture" [src]="BASE_URL + (profile.person.photo ? profile.person.photo : 'default.png')" alt="Image de profile"/>
+    <div class="">
+      <div class="d-flex justify-content-between align-self-center">
+        <h1>{{ profile.username }}</h1>
+        <a *ngIf="canViewAll()" [routerLink]="['/profile', profile.id, 'edit']"><img id="icon" src="assets/icons/setting.svg"></a>
+      </div>
+      <h2 *ngIf="canViewAll()">{{ profile.person.firstname + ' ' + profile.person.lastname }}</h2>
+      <p>A rejoint le {{ profile.person.created_at|date:'dd/MM/yyyy':'UTC +1' }}</p>
+    </div>
+  </div>
+
+
+  <div class="col-md-9 col-sm-12">
+    <!--{% if view_all %}
+    <h1>Films vues</h1>
+    <div class="table-reservations">
+      <table class="table">
+        <tr><th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th></tr>
+        {% for basket in user.baskets %}
+        {% if ((not basket.isActive) and (basket.status == "paid")) %}
+        {% for reservation in basket.reservations %}
+        <tr>
+          <td class="imagePreview"> <img src="{{ asset(path=reservation.programme.film.coverPath, packageName='films_cover') }}" alt="affiche du film" class="imagePreview"/></td>
+          <td class="column-wrap">{{ reservation.programme.film.title }} </td>
+          <td class="column-wrap">{{ reservation.programme.date ? reservation.programme.date|date('d/m/Y') }} <br>de {{ reservation.programme.date ? reservation.programme.date|date('H:i') : ''}} à {{ reservation.programme.date ? reservation.programme.date|date_modify('+' ~ reservation.programme.film.duration ~ ' minutes')|date('H:i') : '' }}</td>
+          <td class="column-wrap">{{ reservation.seats|length }}</td>
+          <td class="column-wrap">
+            <div class="d-flex justify-content-evenly">
+              <a class="btn btn-danger" href="{{ url('account.ticket', {id: reservation.id}) }}">
+                Voir le ticket
+              </a>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        {% endfor %}
+      </table>
+    </div>
+    {% endif %}-->
+
+    <div>
+      <h1>Commentaires</h1>
+      <table class="table">
+        <thead>
+          <tr><th>Film</th><th>Titre</th><th>Note</th></tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let comment of profile.visibleComments">
+            <td><a [routerLink]="['/film', comment.film.slug]">{{ comment.film.title }}</a></td>
+            <td><a [routerLink]="['/film', comment.film.slug]">{{ comment.title }}</a></td>
+            <td><a [routerLink]="['/film', comment.film.slug]">{{ comment.note }}/20</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

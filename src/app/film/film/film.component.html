@@ -23,12 +23,12 @@
 
       <h2>Réalisateurs:</h2>
       <ul *ngIf="film.directors?.length != 0 ; else noOne">
-        <li *ngFor="let director of film.directors"><a [routerLink]="['/personality', director.id]">{{ director.getFullname() }}</a></li>
+        <li *ngFor="let director of film.directors"><a [routerLink]="['/personality', director.id]">{{ director.firstname + ' ' + director.lastname }}</a></li>
       </ul>
 
       <h2>Acteurs:</h2>
       <ul *ngIf="film.actors?.length != 0; else noOne">
-        <li *ngFor="let actor of film.actors"><a [routerLink]="['/personality', actor.id]">{{ actor.getFullname() }}</a></li>
+        <li *ngFor="let actor of film.actors"><a [routerLink]="['/personality', actor.id]">{{ actor.firstname + ' ' + actor.lastname }}</a></li>
       </ul>
 
       <ng-template #noOne><p>Non renseigné</p></ng-template>

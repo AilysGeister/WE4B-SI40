@@ -31,6 +31,12 @@ import { ReportsListComponent } from './admin-pages/reports/reports-list/reports
 import { PersonalityComponent } from './personality/personality.component';
 import { PinedFilmsComponent } from './admin-pages/films/pined-films/pined-films.component';
 import { SearchFilmComponent } from './film/search-film/search-film.component';
+import { ProfileComponent } from './auth/profile/profile.component';
+import { EditProfileComponent } from './auth/edit-profile/edit-profile.component';
+import { UsersListComponent } from './admin-pages/users/users-list/users-list.component';
+import { UserFormComponent } from './admin-pages/users/user-form/user-form.component';
+import { PersonalityFormComponent } from './admin-pages/personalities/personality-form/personality-form.component';
+import { PersonalitiesListComponent } from './admin-pages/personalities/personalities-list/personalities-list.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +66,12 @@ import { SearchFilmComponent } from './film/search-film/search-film.component';
     PersonalityComponent,
     PinedFilmsComponent,
     SearchFilmComponent,
+    ProfileComponent,
+    EditProfileComponent,
+    UsersListComponent,
+    UserFormComponent,
+    PersonalityFormComponent,
+    PersonalitiesListComponent,
   ],
   imports: [
     BrowserModule,
