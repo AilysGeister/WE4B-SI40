@@ -31,6 +31,16 @@ export class FilmService {
     );
   }
 
+  getFilmById(id: number): Observable<Film> {
+    return this.http.get<any>(this.BASE_URL + id).pipe(
+      map((json: any) => new Film(json))
+    );
+  }
+
+  getProgrammesByFilmId(id: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.BASE_URL}${id}/programmes`);
+  }
+
   /**
    * Récuperation de tout les films en JSON.
    */

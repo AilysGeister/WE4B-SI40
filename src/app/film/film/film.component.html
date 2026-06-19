@@ -36,5 +36,37 @@
   </div>
 
   <hr/>
+  <section class="programmes-section">
+    <h2>Réservations disponibles</h2>
+
+    <div *ngIf="programmeGroups.length > 0; else noProgrammes" class="horizontal-left">
+      <div class="column programme-card" *ngFor="let group of programmeGroups">
+        <h4 class="programme-date">
+          <u>{{ group.dateLabel }}</u>
+        </h4>
+
+        <div *ngFor="let programme of group.programmes" class="programme-row">
+          <button
+            class="btn btn-lg btn-primary programme-button"
+            type="button"
+            [id]="'programme-' + programme.id"
+            (click)="goToProgramme(programme)">
+            <span class="programme-time">{{ getProgrammeTime(programme) }}</span>
+            <img
+              *ngIf="getProgrammeLanguageIcon(programme) as languageIcon"
+              class="programme-language-icon"
+              [src]="'assets/images/' + languageIcon"
+              alt="" />
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noProgrammes>
+      <p class="empty-state">Aucune réservation disponible pour le moment.</p>
+    </ng-template>
+  </section>
+
+  <hr/>
   <app-comment-area [comments]="film.visibleComments" [filmId]="film.id"></app-comment-area>
 </div>
