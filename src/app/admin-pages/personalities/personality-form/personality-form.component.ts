@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {UsersService} from "../../users/users.service";
 import {PersonalityService} from "../../../personality/personality.service";
+import {Film} from "../../../../models/film.model";
 
 @Component({
   selector: 'app-personality-form',
@@ -21,6 +21,11 @@ export class PersonalityFormComponent implements OnInit {
   message: string = "";
   typeResponse: string = "";
 
+  directedFilmsId: number[] = [];
+  playedFilmsId: number[] = [];
+  directedFilms: Film[] = [];
+  playedFilms: Film[] = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -30,7 +35,6 @@ export class PersonalityFormComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
 
-    //Édition ou création:
     this.personId = this.route.snapshot.paramMap.get('id');
 
     if (this.isEditMode && this.personId) {
@@ -60,6 +64,8 @@ export class PersonalityFormComponent implements OnInit {
           lastname: personality.lastname,
           birthdate: personality.birthdate,
         });
+        if (personality.directedFilms) this.directedFilms = personality.directedFilms;
+        if (personality.playedFilms) this.playedFilms = personality.playedFilms;
       },
       error: (err) => {
         this.message = "Erreur lors du chargement de l'utilisateur";
@@ -68,10 +74,15 @@ export class PersonalityFormComponent implements OnInit {
     });
   }
 
-  /**
-   * Gestion des fichiers uploadés.
-   * @param event
-   */
+  // Événements de capture des IDs
+  onDirectedFilmsChanged(ids: number[]): void {
+    this.directedFilmsId = ids;
+  }
+
+  onplayedFilmsChanged(ids: number[]): void {
+    this.playedFilmsId = ids;
+  }
+
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
@@ -87,8 +98,9 @@ export class PersonalityFormComponent implements OnInit {
     formData.append('lastname', formValue.lastname);
     formData.append('birthdate', formValue.birthdate || '');
     formData.append('deletePhoto', formValue.deletePhoto ? '1' : '0');
+    formData.append('directedFilms', JSON.stringify(this.directedFilmsId));
+    formData.append('playedFilms', JSON.stringify(this.playedFilmsId));
 
-    //Photo si uploadée:
     if (this.selectedFile) {
       formData.append('photo', this.selectedFile, this.selectedFile.name);
     }
@@ -101,7 +113,8 @@ export class PersonalityFormComponent implements OnInit {
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';
-          this.typeResponse = "danger"; }
+          this.typeResponse = "danger";
+        }
       });
     } else {
       this.personalityService.create(formData).subscribe({
@@ -111,7 +124,8 @@ export class PersonalityFormComponent implements OnInit {
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';
-          this.typeResponse = "danger"; }
+          this.typeResponse = "danger";
+        }
       });
     }
   }

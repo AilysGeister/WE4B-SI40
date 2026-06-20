@@ -50,6 +50,7 @@ import { RoomsListComponent } from './admin-pages/rooms/rooms-list/rooms-list.co
 import { RoomFormComponent } from './admin-pages/rooms/room-form/room-form.component';
 import { GenresSelectorComponent } from './admin-pages/films/genres-selector/genres-selector.component';
 import { PersonalitiesSelectorComponent } from './admin-pages/personalities/personalities-selector/personalities-selector.component';
+import { FilmSelectorComponent } from './admin-pages/films/film-selector/film-selector.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +99,7 @@ import { PersonalitiesSelectorComponent } from './admin-pages/personalities/pers
     RoomFormComponent,
     GenresSelectorComponent,
     PersonalitiesSelectorComponent,
+    FilmSelectorComponent,
   ],
   imports: [
     BrowserModule,
