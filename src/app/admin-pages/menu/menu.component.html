@@ -15,11 +15,11 @@
   <div *ngIf="isFundManager()">
     <strong><img src="assets/icons/dashboard/watching.svg" alt="icone film"> Gestion des Films</strong>
     <ul>
-      <li><a>Films & Genres</a></li>
+      <li><a [routerLink]="['films']">Films & Genres</a></li>
       <li><a [routerLink]="['pined-films']">Films à la une</a></li>
-      <li><a>Programmations</a></li>
-      <li><a>Salles</a></li>
-      <li><a>Langues</a></li>
+      <li><a [routerLink]="['programmes']">Programmations</a></li>
+      <li><a [routerLink]="['rooms']">Salles</a></li>
+      <li><a [routerLink]="['langs']">Langues</a></li>
     </ul>
   </div>
   <div *ngIf="isAdmin()">

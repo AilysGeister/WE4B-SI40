@@ -25,6 +25,15 @@ export class UsersListComponent implements OnInit {
   }
 
   onDelete(id: number) {
-
+    if (id && confirm("Êtes-vous sûr de vouloir supprimer cette utilisateur ? (Cette action est irréversible !)")) {
+      this.usersService.delete(id.toString()).subscribe({
+        next: () => {
+          this.users = this.users.filter(user => user.id !== id);
+        },
+        error: (err) => {
+          alert("Une erreur est survenue lors de la suppression.");
+        }
+      });
+    }
   }
 }

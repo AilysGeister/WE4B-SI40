@@ -1,0 +1,20 @@
+<div class="personalities-selector-container">
+  <label>{{ label }}</label>
+
+  <div class="search-area">
+    <div class="chips-container">
+      <span *ngFor="let person of selectedPersonalities" class="chip">
+        {{ person.firstname }} {{ person.lastname }}
+        <button type="button" class="remove-btn" (click)="removePersonality(person)">&times;</button>
+      </span>
+    </div>
+
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()" [placeholder]="placeholder" autocomplete="off"/>
+  </div>
+
+  <ul *ngIf="filteredPersnolaities.length > 0" class="suggestions-list">
+    <li *ngFor="let person of filteredPersnolaities" (click)="selectPersonality(person)">
+      {{ person.firstname }} {{ person.lastname }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,24 @@
+<div class="horizontal">
+  <h1>Salles</h1><a class="btn btn-primary" [routerLink]="['new']">Nouvelle langues</a>
+</div>
+<div>
+  <table *ngIf="rooms.length != 0; else noLang" class="table table-striped">
+    <thead>
+    <tr><th>ID</th><th>Nom</th><th>Capacité</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let room of rooms">
+      <td>{{ room.id }}</td>
+      <td>{{ room.name }}</td>
+      <td>{{ room.capacity }}</td>
+      <td>
+        <div class="d-flex justify-content-evenly">
+          <a class="btn btn-primary" [routerLink]="['edit', room.id]" id="edit" >Éditer</a>
+          <button class="btn btn-danger" (click)="onDelete(room.id)">Supprimer</button>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <ng-template #noLang><em>Aucune langue à afficher.</em></ng-template>
+</div>
