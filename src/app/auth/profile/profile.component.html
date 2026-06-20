@@ -39,7 +39,7 @@
 
     <div>
       <h1>Commentaires</h1>
-      <table class="table">
+      <table class="table" *ngIf="profile.visibleComments.length != 0; else noComment">
         <thead>
           <tr><th>Film</th><th>Titre</th><th>Note</th></tr>
         </thead>
@@ -51,6 +51,7 @@
           </tr>
         </tbody>
       </table>
+      <ng-template #noComment><em>Aucun commentaire.</em></ng-template>
     </div>
   </div>
 </div>
