@@ -91,6 +91,7 @@ export class RoomFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/rooms']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';

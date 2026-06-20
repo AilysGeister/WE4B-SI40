@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PersonalityService} from "../../../personality/personality.service";
 import {Film} from "../../../../models/film.model";
 
@@ -29,6 +29,7 @@ export class PersonalityFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private personalityService: PersonalityService,
   ) {}
 
@@ -121,6 +122,7 @@ export class PersonalityFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/personalities']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';

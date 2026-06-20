@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FilmService} from "../../../film/film.service";
 import {Genre} from "../../../../models/Genre";
 import {Person} from "../../../../models/person.model";
@@ -30,6 +30,7 @@ export class FilmFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private filmService: FilmService,
   ) {}
 
@@ -138,6 +139,7 @@ export class FilmFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/films'])
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';

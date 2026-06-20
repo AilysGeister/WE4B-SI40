@@ -113,6 +113,7 @@ export class ProgrammeFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/programmes']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';
