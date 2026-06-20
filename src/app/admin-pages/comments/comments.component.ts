@@ -57,15 +57,15 @@ export class CommentsComponent implements OnInit {
           return a.id - b.id;
         case 'ID-DESC':
           return b.id - a.id;
-        case 'ALPHA-ASC':
-          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
-        case 'ALPHA-DESC':
-          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
         case 'DATE-ASC':
+          return new Date(a.created_at).getTime() - new Date(b.created_at).getTime();
+        case 'DATE-DESC':
+          return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        case 'ALPHA-ASC':
           const titreA = a?.title || '';
           const titreB = b?.title || '';
           return titreA.localeCompare(titreB);
-        case 'DATE-DESC':
+        case 'ALPHA-DESC':
           const tA = a?.title || '';
           const tB = b?.title || '';
           return tB.localeCompare(tA);
