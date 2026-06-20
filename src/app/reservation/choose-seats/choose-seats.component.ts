@@ -189,25 +189,28 @@ export class ChooseSeatsComponent implements OnInit, OnDestroy {
       return;
     }
 
-    if (!this.currentUser) {
+    const currentUser = this.currentUser;
+
+    if (!currentUser) {
       this.error = 'Vous devez être connecté pour réserver.';
       return;
     }
 
     const seatIds = Array.from(this.selectedSeats);
     const updatePayload = { seatIds };
-    const createPayload = {
-      programmeId: this.programme?.id ?? this.programmeId,
-      seatIds,
-      userId: this.currentUser.id,
-      basket: this.programme?.basket?.id ?? null
-    };
 
     this.currentUserReservationId = this.findCurrentUserReservationId(this.reservations);
 
     const request$ = this.currentUserReservationId !== null
       ? this.reservationService.updateReservation(this.currentUserReservationId, updatePayload)
-      : this.reservationService.createReservation(createPayload);
+      : this.reservationService.getBasket().pipe(
+        switchMap((basket) => this.reservationService.createReservation({
+          programmeId: this.programme?.id ?? this.programmeId,
+          seatIds,
+          userId: currentUser.id,
+          basket: basket?.id ?? null
+        }))
+      );
 
     request$.subscribe({
       next: () => {
