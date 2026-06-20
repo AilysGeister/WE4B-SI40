@@ -12,26 +12,30 @@
   </div>
 
 
-  <div class="col-md-9 col-sm-12" *ngIf="canViewAll()">
-    <h1>Films vues</h1>
-    <div class="table-programmes">
-      <table class="table" *ngIf="viewed.length != 0">
-        <thead>
-        <tr>
-          <th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let view of viewed">
-          <td class="imagePreview"><img *ngIf="view.reservations?.[0]?.programme?.film?.coverPath" [src]="BASE_URL + 'films_cover/' + view.reservations[0].programme.film.coverPath" alt="Affiche du film {{ view.reservations[0].programme.film.title }}"/></td>
-          <td>{{ view.reservations?.[0]?.programme?.film?.title || 'Aucun film' }}</td>
-          <td>{{ view.date | date: 'dd/MM/YY HH:mm': 'UTC+1' }}</td>
-          <td>{{ view.reservations?.[0]?.seats?.length || 0 }}</td>
-          <td><button class="btn btn-outline-primary" (click)="ticket(view.id)">Ticket</button></td>
-        </tr>
-        </tbody>
-      </table>
+  <div class="col-md-9 col-sm-12">
+    <div *ngIf="canViewAll()">
+      <h1>Films vues</h1>
+      <div class="table-programmes">
+        <table class="table" *ngIf="viewed.length != 0; else noViewed">
+          <thead>
+          <tr>
+            <th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let view of viewed">
+            <td class="imagePreview"><img *ngIf="view.reservations?.[0]?.programme?.film?.coverPath" [src]="BASE_URL + 'films_cover/' + view.reservations[0].programme.film.coverPath" alt="Affiche du film {{ view.reservations[0].programme.film.title }}"/></td>
+            <td>{{ view.reservations?.[0]?.programme?.film?.title || 'Aucun film' }}</td>
+            <td>{{ view.date | date: 'dd/MM/YY HH:mm': 'UTC+1' }}</td>
+            <td>{{ view.reservations?.[0]?.seats?.length || 0 }}</td>
+            <td><button class="btn btn-outline-primary" (click)="ticket(view.id)">Ticket</button></td>
+          </tr>
+          </tbody>
+        </table>
+        <ng-template #noViewed><em>Aucun film vue.</em></ng-template>
+      </div>
     </div>
+
 
     <div>
       <h1>Commentaires</h1>
