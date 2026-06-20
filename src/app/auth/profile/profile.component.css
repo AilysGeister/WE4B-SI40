@@ -26,3 +26,26 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+.table-programmes {
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+  }
+}

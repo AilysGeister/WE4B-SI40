@@ -1,6 +1,6 @@
 <div class="row person">
   <div class="col-md-3 col-sm-12 person-info">
-    <img class="person-picture" [src]="BASE_URL + (profile.person.photo ? profile.person.photo : 'default.png')" alt="Image de profile"/>
+    <img class="person-picture" [src]="BASE_URL + 'profil_pictures/' + (profile.person.photo ? profile.person.photo : 'default.png')" alt="Image de profile"/>
     <div class="">
       <div class="d-flex justify-content-between align-self-center">
         <h1>{{ profile.username }}</h1>
@@ -12,34 +12,26 @@
   </div>
 
 
-  <div class="col-md-9 col-sm-12">
-    <!--{% if view_all %}
+  <div class="col-md-9 col-sm-12" *ngIf="canViewAll()">
     <h1>Films vues</h1>
     <div class="table-programmes">
-      <table class="table">
-        <tr><th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th></tr>
-        {% for basket in user.baskets %}
-        {% if ((not basket.isActive) and (basket.status == "paid")) %}
-        {% for reservation in basket.programmes %}
+      <table class="table" *ngIf="viewed.length != 0">
+        <thead>
         <tr>
-          <td class="imagePreview"> <img src="{{ asset(path=reservation.programme.film.coverPath, packageName='films_cover') }}" alt="affiche du film" class="imagePreview"/></td>
-          <td class="column-wrap">{{ reservation.programme.film.title }} </td>
-          <td class="column-wrap">{{ reservation.programme.date ? reservation.programme.date|date('d/m/Y') }} <br>de {{ reservation.programme.date ? reservation.programme.date|date('H:i') : ''}} à {{ reservation.programme.date ? reservation.programme.date|date_modify('+' ~ reservation.programme.film.duration ~ ' minutes')|date('H:i') : '' }}</td>
-          <td class="column-wrap">{{ reservation.seats|length }}</td>
-          <td class="column-wrap">
-            <div class="d-flex justify-content-evenly">
-              <a class="btn btn-danger" href="{{ url('account.ticket', {id: reservation.id}) }}">
-                Voir le ticket
-              </a>
-            </div>
-          </td>
+          <th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th>
         </tr>
-        {% endfor %}
-        {% endif %}
-        {% endfor %}
+        </thead>
+        <tbody>
+        <tr *ngFor="let view of viewed">
+          <td class="imagePreview"><img *ngIf="view.reservations?.[0]?.programme?.film?.coverPath" [src]="BASE_URL + 'films_cover/' + view.reservations[0].programme.film.coverPath" alt="Affiche du film {{ view.reservations[0].programme.film.title }}"/></td>
+          <td>{{ view.reservations?.[0]?.programme?.film?.title || 'Aucun film' }}</td>
+          <td>{{ view.date | date: 'dd/MM/YY HH:mm': 'UTC+1' }}</td>
+          <td>{{ view.reservations?.[0]?.seats?.length || 0 }}</td>
+          <td><button class="btn btn-outline-primary" (click)="ticket(view.id)">Ticket</button></td>
+        </tr>
+        </tbody>
       </table>
     </div>
-    {% endif %}-->
 
     <div>
       <h1>Commentaires</h1>

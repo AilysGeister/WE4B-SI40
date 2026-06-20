@@ -61,4 +61,10 @@ export class ReservationService {
   payBasket(): Observable<any> {
     return this.http.post<any>(`${this.BASE_URL}/basket/pay`, {});
   }
+
+  //PANIER
+
+  getViewedFilms(userId: String | Number) {
+    return this.http.get<any>(this.BASE_URL + '/basket/user/' + userId);
+  }
 }

@@ -51,6 +51,7 @@ import { RoomFormComponent } from './admin-pages/rooms/room-form/room-form.compo
 import { GenresSelectorComponent } from './admin-pages/films/genres-selector/genres-selector.component';
 import { PersonalitiesSelectorComponent } from './admin-pages/personalities/personalities-selector/personalities-selector.component';
 import { FilmSelectorComponent } from './admin-pages/films/film-selector/film-selector.component';
+import { TicketComponent } from './film/ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { FilmSelectorComponent } from './admin-pages/films/film-selector/film-se
     GenresSelectorComponent,
     PersonalitiesSelectorComponent,
     FilmSelectorComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,
