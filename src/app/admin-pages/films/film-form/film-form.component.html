@@ -1,0 +1,55 @@
+<h1>{{ title }}</h1>
+<form [formGroup]="filmForm" (ngSubmit)="onSubmit()">
+  <p [className]="'text-' + typeResponse">{{ message }}</p>
+
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="floatingTitle" formControlName="title" minlength="3" maxlength="50">
+    <label for="floatingTitle">Titre</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <textarea class="form-control" id="floatingDescription" formControlName="description" minlength="3"></textarea>
+    <label for="floatingDescription">Description</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="floatingSlug" formControlName="slug" minlength="3" maxlength="60">
+    <label for="floatingSlug">Slug</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="number" class="form-control" id="floatingPrice" formControlName="price" min="0" max="999">
+    <label for="floatingPrice">Prix</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="number" class="form-control" id="floatingDuration" formControlName="duration" min="0" max="999">
+    <label for="floatingDuration">Durée (en minutes)</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="file" class="form-control" id="floatingCover" formControlName="cover" (change)='onFileChange($event)'>
+    <label for="floatingCover">Affiche</label>
+  </div>
+
+  <div class="form-check mb-1" *ngIf="isEditMode">
+    <input class="form-check-input" type="checkbox" id="deletecover" formControlName="deleteCover"/>
+    <label class="form-check-label" for="deleteCover">Supprimer</label>
+  </div>
+
+  <div class="mb-3">
+    <app-genres-selector [initialGenres]="filmGenres" (selectedGenreIds)="onGenresChanged($event)"></app-genres-selector>
+  </div>
+
+  <div class="mb-3">
+    <app-personalities-selector label="Réalisateur(s) :" [initialPeople]="filmDirectors" (selectedPeopleIds)="onDirectorsChanged($event)"></app-personalities-selector>
+  </div>
+
+  <div class="mb-3">
+    <app-personalities-selector label="Acteurs :" [initialPeople]="filmActors" (selectedPeopleIds)="onActorsChanged($event)"></app-personalities-selector>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="submit" class="btn btn-primary" value="Valider" [disabled]="filmForm.invalid">
+  </div>
+</form>

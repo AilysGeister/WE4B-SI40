@@ -17,6 +17,14 @@ export class FilmService {
   ) {}
 
   /**
+   * Création d'un film via l'API.
+   * @param formData Données du film.
+   */
+  create(formData: FormData): Observable<any> {
+    return this.http.post<Film>(this.BASE_URL + 'create', formData);
+  }
+
+  /**
    * Récupère le JSON d'un film unique de l'API grâce à son slug.
    * @param slug Slug du film à charger.
    */
@@ -33,12 +41,10 @@ export class FilmService {
 
   /**
    * Récupère le JSON d'un film unique de l'API grâce à son identifiant.
-   * @param slug Slug du film à charger.
+   * @param id Identifiant du film à charger.
    */
-  getFilmById(id: number): Observable<Film> {
-    return this.http.get<any>(this.BASE_URL + id).pipe(
-      map((json: any) => new Film(json))
-    );
+  getFilmById(id: String): Observable<Film> {
+    return this.http.get<any>(this.BASE_URL + id + '/fetch');
   }
 
   /**
@@ -46,7 +52,7 @@ export class FilmService {
    * @param id
    */
   getProgrammesByFilmId(id: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.BASE_URL}${id}/programmes`);
+    return this.http.get<any[]>(this.BASE_URL + id +'/programmes');
   }
 
   /**
@@ -80,5 +86,22 @@ export class FilmService {
    */
   getReservableFilms(): Observable<Film[]> {
     return this.http.get<Film[]>(this.BASE_URL + 'reservable')
+  }
+
+  /**
+   * Met à jour un film via l'API.
+   * @param id
+   * @param formDate
+   */
+  update(id: string, formDate: FormData): Observable<any> {
+    return this.http.post(this.BASE_URL + id, formDate)
+  }
+
+  /**
+   * Permet d'envoyer l'ordre de suppression à l'API.
+   * @param id
+   */
+  delete(id: string) {
+    return this.http.delete<any>(this.BASE_URL + id);
   }
 }

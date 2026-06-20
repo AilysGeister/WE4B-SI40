@@ -12,7 +12,7 @@ src/app/reservation/
 │   ├── choose-seats.component.html    (template)
 │   ├── choose-seats.component.css     (styles)
 │   └── choose-seats.component.spec.ts (tests)
-├── reservation.service.ts             (service API)
+├── programme.service.ts             (service API)
 ├── reservation.module.ts              (module Angular)
 └── reservation-routing.module.ts      (routing)
 ```

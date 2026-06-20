@@ -1,7 +1,6 @@
 <div class="row person">
   <div class="col-md-3 col-sm-12 person-info">
-    <img class="" src="{{ BASE_URL + personality.photo }}"
-         alt="Image de profile"/>
+    <img class="" [src]="BASE_URL + (personality.photo ? personality.photo : 'default.png')" alt="Image de profile"/>
     <div class="">
       <h1>{{ personality.firstname }} {{ personality.lastname }}</h1>
       <p>Né le {{ personality.birthdate|date: 'dd/MM/yyyy':'UTC +1' }}</p>

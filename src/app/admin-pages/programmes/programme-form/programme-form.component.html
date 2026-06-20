@@ -1,0 +1,31 @@
+<h1>{{ title }}</h1>
+<form [formGroup]="programmeForm" (ngSubmit)="onSubmit()">
+  <p [className]="'text-' + typeResponse">{{ message }}</p>
+
+  <div class="form-floating mb-1">
+    <input type="datetime-local" class="form-control" id="floatingDate" formControlName="date">
+    <label for="floatingName">Date</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <app-search-film (film)="programmeForm.patchValue({ film: $event })"></app-search-film>
+  </div>
+
+  <div class="form-floating mb-1">
+    <select class="form-select" aria-label="Default select example" formControlName="roomId">
+      <option *ngFor="let room of rooms" [value]="room.id">{{ room.name }}</option>
+    </select>
+    <label for="floatingFirstClassSeats">Salle</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <select class="form-select" aria-label="Default select example" formControlName="langId">
+      <option value="1" *ngFor="let lang of langs" [value]="lang.id">{{ lang.name }}</option>
+    </select>
+    <label for="floatingFirstClassSeats">Langue</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="submit" class="btn btn-primary" value="Valider">
+  </div>
+</form>

@@ -13,7 +13,7 @@ export class EditProfileService {
   ) {}
 
   updatePhoto(formData: FormData) {
-    return this.http.post(this.BASE_URL + 'upadte-photo', formData)
+    return this.http.post(this.BASE_URL + 'update-photo', formData)
   }
 
   updatePersonalDatas(body: any) {

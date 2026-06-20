@@ -15,12 +15,12 @@
   <div class="col-md-9 col-sm-12">
     <!--{% if view_all %}
     <h1>Films vues</h1>
-    <div class="table-reservations">
+    <div class="table-programmes">
       <table class="table">
         <tr><th></th><th>Film</th><th>Date</th><th>Nombre de places</th><th></th></tr>
         {% for basket in user.baskets %}
         {% if ((not basket.isActive) and (basket.status == "paid")) %}
-        {% for reservation in basket.reservations %}
+        {% for reservation in basket.programmes %}
         <tr>
           <td class="imagePreview"> <img src="{{ asset(path=reservation.programme.film.coverPath, packageName='films_cover') }}" alt="affiche du film" class="imagePreview"/></td>
           <td class="column-wrap">{{ reservation.programme.film.title }} </td>
