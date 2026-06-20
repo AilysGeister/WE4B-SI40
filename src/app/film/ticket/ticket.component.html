@@ -1,0 +1,16 @@
+
+<div class="card">
+  <div class="card-header">
+    <h1>Ticket</h1>
+  </div>
+
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Film: <strong>{{ ticket.reservations?.[0]?.programme?.film?.title || 'Aucun film' }}</strong></li>
+      <li class="list-group-item">Date: <strong>{{ ticket.date | date: 'dd/MM/YY HH:mm': 'UTC+1' }}</strong></li>
+      <li class="list-group-item">Nombre de siège: <strong>{{ ticket.reservations?.[0]?.seats?.length || 0 }}</strong></li>
+    </ul>
+  </div>
+
+  <img class="card-img" src="assets/icons/ticket/code-qr.svg" alt="Qr-Code"/>
+</div>

@@ -35,6 +35,7 @@ import {GenreFormComponent} from "./admin-pages/films/genre-form/genre-form.comp
 import {ProgrammeFormComponent} from "./admin-pages/programmes/programme-form/programme-form.component";
 import {RoomFormComponent} from "./admin-pages/rooms/room-form/room-form.component";
 import {LangFormComponent} from "./admin-pages/langs/lang-form/lang-form.component";
+import {TicketComponent} from "./film/ticket/ticket.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
   {path: 'profile/:id', component: ProfileComponent},
   {path: 'profile/:id/edit', component: EditProfileComponent, canActivate: [EditProfileGuard]},
+  {path: 'profile/:userId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'film', component: FilmListComponent},
   {path: 'film/:slug', component: FilmComponent},
   {path: 'personality/:id', component: PersonalityComponent},
