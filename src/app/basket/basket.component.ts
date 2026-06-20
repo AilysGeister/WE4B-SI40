@@ -72,8 +72,6 @@ export class BasketComponent implements OnInit, OnDestroy {
     this.error = null;
 
     this.reservationService.getBasket().pipe(
-      catchError(() => of(this.currentUser?.basket ?? null)),
-      map((basket) => this.resolveCurrentUserBasket(basket) ?? this.currentUser?.basket ?? { reservations: [] }),
       switchMap((basket) => this.loadReservationDetails(basket))
     ).subscribe({
       next: ({ basket, reservations }) => {
@@ -136,12 +134,24 @@ export class BasketComponent implements OnInit, OnDestroy {
   }
 
   payBasket(): void {
-    
-    this.showPayDialog = false;
-    this.successMessage = 'Votre panier a bien été payé.';
-    this.loadBasket();
-    
-    
+    const basketId = Number(this.basket?.id);
+
+    if (!Number.isFinite(basketId)) {
+      this.error = 'Impossible de retrouver le panier à payer.';
+      return;
+    }
+
+    this.reservationService.payBasket(basketId).subscribe({
+      next: () => {
+        this.showPayDialog = false;
+        this.successMessage = 'Votre panier a bien été payé.';
+        this.loadBasket();
+      },
+      error: (err) => {
+        console.error('Erreur lors du paiement du panier', err);
+        this.error = 'Impossible de payer votre panier.';
+      }
+    });
   }
 
   getTotalBasket(): number {
@@ -293,27 +303,6 @@ export class BasketComponent implements OnInit, OnDestroy {
     const slug = typeof candidate === 'string' ? candidate.trim() : '';
 
     return slug.length > 0 ? slug : null;
-  }
-
-  private resolveCurrentUserBasket(response: any): any | null {
-    if (!response) {
-      return null;
-    }
-
-    if (Array.isArray(response)) {
-      const currentUserId = this.currentUser?.id !== undefined ? Number(this.currentUser.id) : null;
-
-      if (currentUserId !== null) {
-        const matchingBasket = response.find((basket) => Number(basket?.user?.id ?? basket?.userId ?? basket?.user) === currentUserId);
-        if (matchingBasket) {
-          return matchingBasket;
-        }
-      }
-
-      return response[0] ?? null;
-    }
-
-    return response;
   }
 
 }
