@@ -23,6 +23,7 @@ export class GenreFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private genreService: GenreService,
   ) { }
 
@@ -83,6 +84,7 @@ export class GenreFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/genres']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';

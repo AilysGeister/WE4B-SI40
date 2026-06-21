@@ -21,11 +21,6 @@ export class PersonalityFormComponent implements OnInit {
   message: string = "";
   typeResponse: string = "";
 
-  directedFilmsId: number[] = [];
-  playedFilmsId: number[] = [];
-  directedFilms: Film[] = [];
-  playedFilms: Film[] = [];
-
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -65,23 +60,12 @@ export class PersonalityFormComponent implements OnInit {
           lastname: personality.lastname,
           birthdate: personality.birthdate,
         });
-        if (personality.directedFilms) this.directedFilms = personality.directedFilms;
-        if (personality.playedFilms) this.playedFilms = personality.playedFilms;
       },
       error: (err) => {
         this.message = "Erreur lors du chargement de l'utilisateur";
         this.typeResponse = "danger";
       }
     });
-  }
-
-  // Événements de capture des IDs
-  onDirectedFilmsChanged(ids: number[]): void {
-    this.directedFilmsId = ids;
-  }
-
-  onplayedFilmsChanged(ids: number[]): void {
-    this.playedFilmsId = ids;
   }
 
   onFileChange(event: any): void {
@@ -99,8 +83,6 @@ export class PersonalityFormComponent implements OnInit {
     formData.append('lastname', formValue.lastname);
     formData.append('birthdate', formValue.birthdate || '');
     formData.append('deletePhoto', formValue.deletePhoto ? '1' : '0');
-    formData.append('directedFilms', JSON.stringify(this.directedFilmsId));
-    formData.append('playedFilms', JSON.stringify(this.playedFilmsId));
 
     if (this.selectedFile) {
       formData.append('photo', this.selectedFile, this.selectedFile.name);

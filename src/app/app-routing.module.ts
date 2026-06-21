@@ -50,10 +50,10 @@ const routes: Routes = [
   {path: 'tools', component: AdminPagesComponent, canActivate: [AdminGuard], canActivateChild: [AdminGuard], data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR'] },
     children: [
       {path: '', component: DashboardComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR']}},
-      {path: 'reports', component: ReportsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'Role_MODERATOR']}},
+      {path: 'reports', component: ReportsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'reports/active', component: LastReportsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'report/:id', component: ReportComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
-      {path: 'comments', component: CommentsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'Role_MODERATOR']}},
+      {path: 'comments', component: CommentsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'films', component: FilmGenreListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
       {path: 'film/new', component: FilmFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
       {path: 'film/edit/:id', component: FilmFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},

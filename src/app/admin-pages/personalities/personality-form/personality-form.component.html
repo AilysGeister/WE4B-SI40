@@ -27,14 +27,6 @@
     <label class="form-check-label" for="deletePhoto">Supprimer</label>
   </div>
 
-  <div class="mb-3">
-    <app-film-selector label="Films réalisés :" [initialFilms]="directedFilms" (selectedFilmIds)="onDirectedFilmsChanged($event)"></app-film-selector>
-  </div>
-
-  <div class="mb-3">
-    <app-film-selector label="Films joués :" [initialFilms]="playedFilms" (selectedFilmIds)="onplayedFilmsChanged($event)"></app-film-selector>
-  </div>
-
   <div class="form-floating mb-1">
     <input type="submit" class="btn btn-primary" value="Valider" [disabled]="personalityForm.invalid">
   </div>
