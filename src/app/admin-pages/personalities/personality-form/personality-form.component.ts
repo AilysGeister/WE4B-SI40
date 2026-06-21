@@ -18,6 +18,11 @@ export class PersonalityFormComponent implements OnInit {
   isEditMode: boolean = true;
   personId: string | null = null;
 
+  directedFilmsId: number[] = [];
+  playedFilmsId: number[] = [];
+  directedFilms: Film[] = [];
+  playedFilms: Film[] = [];
+
   message: string = "";
   typeResponse: string = "";
 
@@ -60,12 +65,22 @@ export class PersonalityFormComponent implements OnInit {
           lastname: personality.lastname,
           birthdate: personality.birthdate,
         });
+        if (personality.directedFilms) this.directedFilms = personality.directedFilms;
+        if (personality.playedFilms) this.playedFilms = personality.playedFilms;
       },
       error: (err) => {
         this.message = "Erreur lors du chargement de l'utilisateur";
         this.typeResponse = "danger";
       }
     });
+  }
+
+  onDirectedFilmsChanged(ids: number[]): void {
+    this.directedFilmsId = ids;
+  }
+
+  onplayedFilmsChanged(ids: number[]): void {
+    this.playedFilmsId = ids;
   }
 
   onFileChange(event: any): void {
@@ -83,6 +98,11 @@ export class PersonalityFormComponent implements OnInit {
     formData.append('lastname', formValue.lastname);
     formData.append('birthdate', formValue.birthdate || '');
     formData.append('deletePhoto', formValue.deletePhoto ? '1' : '0');
+    formData.append('directedFilms', JSON.stringify(this.directedFilmsId));
+
+
+
+    formData.append('playedFilms', JSON.stringify(this.playedFilmsId));
 
     if (this.selectedFile) {
       formData.append('photo', this.selectedFile, this.selectedFile.name);
