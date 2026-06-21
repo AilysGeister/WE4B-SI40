@@ -1,0 +1,20 @@
+<div class="films-selector-container">
+  <label>{{ label }}</label>
+
+  <div class="search-area">
+    <div class="chips-container">
+      <span *ngFor="let film of selectedFilms" class="chip">
+        {{ film.title }}
+        <button type="button" class="remove-btn" (click)="removeFilm(film)">&times;</button>
+      </span>
+    </div>
+
+    <input type="text" [(ngModel)]="searchQuery" (input)="onSearchChange()" [placeholder]="placeholder" autocomplete="off"/>
+  </div>
+
+  <ul *ngIf="filteredFilms.length > 0" class="suggestions-list">
+    <li *ngFor="let film of filteredFilms" (click)="selectFilm(film)">
+      {{ film.title }}
+    </li>
+  </ul>
+</div>

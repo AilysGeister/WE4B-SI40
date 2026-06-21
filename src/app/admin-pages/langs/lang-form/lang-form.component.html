@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+<form [formGroup]="langForm" (ngSubmit)="onSubmit()">
+  <p [className]="'text-' + typeResponse">{{ message }}</p>
+
+  <div class="form-floating mb-1">
+    <input type="text" class="form-control" id="floatingName" formControlName="name" minlength="3" maxlength="50">
+    <label for="floatingName">Nom</label>
+  </div>
+
+  <div class="form-floating mb-1">
+    <input type="submit" class="btn btn-primary" value="Valider">
+  </div>
+</form>

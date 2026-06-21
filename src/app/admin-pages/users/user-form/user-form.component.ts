@@ -29,6 +29,7 @@ export class UserFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private userService: UsersService
   ) {}
 
@@ -174,6 +175,7 @@ export class UserFormComponent implements OnInit {
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/users']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';

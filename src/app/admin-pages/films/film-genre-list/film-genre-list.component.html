@@ -1,0 +1,69 @@
+<div class="row">
+  <div class="col-sm-12 col-md-8">
+    <h1>Films</h1>
+    <div class="horizontal">
+      <div>
+        <label for="sortSelectFilm" class="form-label font-weight-bold">Trier par date :</label>
+        <select id="sortSelectFilm" class="form-select form-control" [(ngModel)]="selectedSort" (change)="onFilmFilterChange()">
+          <option value="ID-ASC">ID Croissant</option>
+          <option value="ID-DESC">ID Décroissant</option>
+          <option value="ALPHA-ASC">Titre A → Z</option>
+          <option value="ALPHA-DESC">Titre Z → A</option>
+        </select>
+      </div>
+
+      <a class="btn btn-primary" [routerLink]="['/tools', 'film', 'new']">Nouveau film</a>
+    </div>
+
+    <table class="table table-striped" *ngIf="this.films.length != 0; else noElement">
+      <thead>
+        <tr><th>ID</th><th>Titre</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let film of films">
+          <td>{{ film.id }}</td>
+          <td>{{ film.title }}</td>
+          <td>
+            <a class="btn btn-primary" [routerLink]="['/film', film.slug]">Voire</a>
+            <a class="btn btn-primary" [routerLink]="['/tools', 'film', 'edit', film.id]">Éditer</a>
+            <button class="btn btn-danger" (click)="onDeleteFilm(film.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="col-sm-12 col-md-4">
+    <h1>Genres</h1>
+    <div class="horizontal">
+      <div>
+        <label for="sortSelectGenre" class="form-label font-weight-bold">Trier par date :</label>
+        <select id="sortSelectGenre" class="form-select form-control" [(ngModel)]="selectedSort" (change)="onGenreFilterChange()">
+          <option value="ID-ASC">ID Croissant</option>
+          <option value="ID-DESC">ID Décroissant</option>
+          <option value="ALPHA-ASC">Titre A → Z</option>
+          <option value="ALPHA-DESC">Titre Z → A</option>
+        </select>
+      </div>
+
+      <a class="btn btn-primary" [routerLink]="['/tools', 'genre', 'new']">Nouveau genre</a>
+    </div>
+
+    <table class="table table-striped" *ngIf="this.genres.length != 0; else noElement">
+      <thead>
+        <tr><th>ID</th><th>Nom</th><th>Actions</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let genre of genres">
+          <td>{{ genre.id }}</td><td>{{ genre.name }}</td>
+          <td>
+            <a class="btn btn-primary" [routerLink]="['/tools','genre','edit', genre.id]">Éditer</a>
+            <button class="btn btn-danger" (click)="onDeleteGenre(genre.id)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #noElement><em>Aucun élément à afficher.</em></ng-template>

@@ -1,0 +1,25 @@
+<div class="horizontal">
+  <h1>Programmes</h1><a class="btn btn-primary" [routerLink]="['new']">Nouvelle programmation</a>
+</div>
+<div>
+  <table *ngIf="programmes.length != 0; else noLang" class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Film</th><th>Salle</th><th>Places totales</th><th>Actions</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let programme of programmes; let i = index">
+        <td>{{ programme.date | date: 'dd/MM/YYYY HH:mm': 'UTC +1' }}</td>
+        <td>{{ programme.film.title }}</td>
+        <td>{{ programme.room.name }}</td>
+        <td>{{ programme.room.capacity }}</td>
+        <td>
+          <div class="d-flex justify-content-evenly">
+            <a class="btn btn-primary" [routerLink]="['edit', programme.id]" id="edit" >Éditer</a>
+            <button class="btn btn-danger" (click)="onDelete(programme.id)">Supprimer</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noLang><em>Aucune langue à afficher.</em></ng-template>
+</div>

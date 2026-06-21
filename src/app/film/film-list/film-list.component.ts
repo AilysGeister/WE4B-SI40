@@ -20,6 +20,9 @@ export class FilmListComponent implements OnInit {
     this.filmService.getAllFilms().subscribe({
       next: (data: Film[]) => {
         this.films = data;
+      },
+      error: () => {
+        this.films = [];
       }
     });
   }

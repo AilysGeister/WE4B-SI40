@@ -26,6 +26,16 @@ import {UsersListComponent} from "./admin-pages/users/users-list/users-list.comp
 import {UserFormComponent} from "./admin-pages/users/user-form/user-form.component";
 import {PersonalitiesListComponent} from "./admin-pages/personalities/personalities-list/personalities-list.component";
 import {PersonalityFormComponent} from "./admin-pages/personalities/personality-form/personality-form.component";
+import {FilmGenreListComponent} from "./admin-pages/films/film-genre-list/film-genre-list.component";
+import {ProgrammeListComponent} from "./admin-pages/programmes/programme-list/programme-list.component";
+import {RoomsListComponent} from "./admin-pages/rooms/rooms-list/rooms-list.component";
+import {LangsListComponent} from "./admin-pages/langs/langs-list/langs-list.component";
+import {FilmFormComponent} from "./admin-pages/films/film-form/film-form.component";
+import {GenreFormComponent} from "./admin-pages/films/genre-form/genre-form.component";
+import {ProgrammeFormComponent} from "./admin-pages/programmes/programme-form/programme-form.component";
+import {RoomFormComponent} from "./admin-pages/rooms/room-form/room-form.component";
+import {LangFormComponent} from "./admin-pages/langs/lang-form/lang-form.component";
+import {TicketComponent} from "./film/ticket/ticket.component";
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
@@ -33,16 +43,31 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent, canActivate: [GuestGuard]},
   {path: 'profile/:id', component: ProfileComponent},
   {path: 'profile/:id/edit', component: EditProfileComponent, canActivate: [EditProfileGuard]},
+  {path: 'profile/:userId/ticket/:ticketId', component: TicketComponent, canActivate: [AuthGuard]},
   {path: 'film', component: FilmListComponent},
   {path: 'film/:slug', component: FilmComponent},
   {path: 'personality/:id', component: PersonalityComponent},
   {path: 'tools', component: AdminPagesComponent, canActivate: [AdminGuard], canActivateChild: [AdminGuard], data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR'] },
     children: [
       {path: '', component: DashboardComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER', 'ROLE_MODERATOR']}},
-      {path: 'reports', component: ReportsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'Role_MODERATOR']}},
+      {path: 'reports', component: ReportsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'reports/active', component: LastReportsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
       {path: 'report/:id', component: ReportComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
-      {path: 'comments', component: CommentsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'Role_MODERATOR']}},
+      {path: 'comments', component: CommentsComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_MODERATOR']}},
+      {path: 'films', component: FilmGenreListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'film/new', component: FilmFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'film/edit/:id', component: FilmFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'genre/new', component: GenreFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'genre/edit/:id', component: GenreFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'programmes', component: ProgrammeListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'programmes/new', component: ProgrammeFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'programmes/edit/:id', component: ProgrammeFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'rooms', component: RoomsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'rooms/new', component: RoomFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'rooms/edit/:id', component: RoomFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'langs', component: LangsListComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'langs/new', component: LangFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
+      {path: 'langs/edit/:id', component: LangFormComponent, data: { expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
       {path: 'pined-films', component: PinedFilmsComponent, data: {expectedRoles: ['ROLE_ADMIN', 'ROLE_FUND_MANAGER']}},
       {path: 'users', component: UsersListComponent, data: {expectedRoles: ['ROLE_ADMIN']}},
       {path: 'users/edit/:id', component: UserFormComponent, data: {expectedRoles: ['ROLE_ADMIN']}},

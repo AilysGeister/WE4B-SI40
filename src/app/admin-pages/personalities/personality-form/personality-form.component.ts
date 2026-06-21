@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
-import {UsersService} from "../../users/users.service";
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ActivatedRoute, Router} from "@angular/router";
 import {PersonalityService} from "../../../personality/personality.service";
+import {Film} from "../../../../models/film.model";
 
 @Component({
   selector: 'app-personality-form',
@@ -18,19 +18,24 @@ export class PersonalityFormComponent implements OnInit {
   isEditMode: boolean = true;
   personId: string | null = null;
 
+  directedFilmsId: number[] = [];
+  playedFilmsId: number[] = [];
+  directedFilms: Film[] = [];
+  playedFilms: Film[] = [];
+
   message: string = "";
   typeResponse: string = "";
 
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private personalityService: PersonalityService,
   ) {}
 
   ngOnInit(): void {
     this.initForm();
 
-    //Édition ou création:
     this.personId = this.route.snapshot.paramMap.get('id');
 
     if (this.isEditMode && this.personId) {
@@ -60,6 +65,8 @@ export class PersonalityFormComponent implements OnInit {
           lastname: personality.lastname,
           birthdate: personality.birthdate,
         });
+        if (personality.directedFilms) this.directedFilms = personality.directedFilms;
+        if (personality.playedFilms) this.playedFilms = personality.playedFilms;
       },
       error: (err) => {
         this.message = "Erreur lors du chargement de l'utilisateur";
@@ -68,10 +75,14 @@ export class PersonalityFormComponent implements OnInit {
     });
   }
 
-  /**
-   * Gestion des fichiers uploadés.
-   * @param event
-   */
+  onDirectedFilmsChanged(ids: number[]): void {
+    this.directedFilmsId = ids;
+  }
+
+  onplayedFilmsChanged(ids: number[]): void {
+    this.playedFilmsId = ids;
+  }
+
   onFileChange(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       this.selectedFile = event.target.files[0];
@@ -87,8 +98,12 @@ export class PersonalityFormComponent implements OnInit {
     formData.append('lastname', formValue.lastname);
     formData.append('birthdate', formValue.birthdate || '');
     formData.append('deletePhoto', formValue.deletePhoto ? '1' : '0');
+    formData.append('directedFilms', JSON.stringify(this.directedFilmsId));
 
-    //Photo si uploadée:
+
+
+    formData.append('playedFilms', JSON.stringify(this.playedFilmsId));
+
     if (this.selectedFile) {
       formData.append('photo', this.selectedFile, this.selectedFile.name);
     }
@@ -101,17 +116,20 @@ export class PersonalityFormComponent implements OnInit {
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';
-          this.typeResponse = "danger"; }
+          this.typeResponse = "danger";
+        }
       });
     } else {
       this.personalityService.create(formData).subscribe({
         next: (rep: any) => {
           this.message = rep.message;
           this.typeResponse = "success";
+          this.router.navigate(['/tools/personalities']);
         },
         error: (err: any) => {
           this.message = err.error?.message || 'Une erreur est survenue';
-          this.typeResponse = "danger"; }
+          this.typeResponse = "danger";
+        }
       });
     }
   }

@@ -39,6 +39,19 @@ import { UsersListComponent } from './admin-pages/users/users-list/users-list.co
 import { UserFormComponent } from './admin-pages/users/user-form/user-form.component';
 import { PersonalityFormComponent } from './admin-pages/personalities/personality-form/personality-form.component';
 import { PersonalitiesListComponent } from './admin-pages/personalities/personalities-list/personalities-list.component';
+import { FilmFormComponent } from './admin-pages/films/film-form/film-form.component';
+import { GenreFormComponent } from './admin-pages/films/genre-form/genre-form.component';
+import { FilmGenreListComponent } from './admin-pages/films/film-genre-list/film-genre-list.component';
+import { ProgrammeListComponent } from './admin-pages/programmes/programme-list/programme-list.component';
+import { ProgrammeFormComponent } from './admin-pages/programmes/programme-form/programme-form.component';
+import { LangsListComponent } from './admin-pages/langs/langs-list/langs-list.component';
+import { LangFormComponent } from './admin-pages/langs/lang-form/lang-form.component';
+import { RoomsListComponent } from './admin-pages/rooms/rooms-list/rooms-list.component';
+import { RoomFormComponent } from './admin-pages/rooms/room-form/room-form.component';
+import { GenresSelectorComponent } from './admin-pages/films/genres-selector/genres-selector.component';
+import { PersonalitiesSelectorComponent } from './admin-pages/personalities/personalities-selector/personalities-selector.component';
+import { FilmSelectorComponent } from './admin-pages/films/film-selector/film-selector.component';
+import { TicketComponent } from './film/ticket/ticket.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +89,19 @@ import { PersonalitiesListComponent } from './admin-pages/personalities/personal
     UserFormComponent,
     PersonalityFormComponent,
     PersonalitiesListComponent,
+    FilmFormComponent,
+    GenreFormComponent,
+    FilmGenreListComponent,
+    ProgrammeListComponent,
+    ProgrammeFormComponent,
+    LangsListComponent,
+    LangFormComponent,
+    RoomsListComponent,
+    RoomFormComponent,
+    GenresSelectorComponent,
+    PersonalitiesSelectorComponent,
+    FilmSelectorComponent,
+    TicketComponent,
   ],
   imports: [
     BrowserModule,
