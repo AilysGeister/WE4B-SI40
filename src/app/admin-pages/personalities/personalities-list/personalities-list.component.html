@@ -1,9 +1,6 @@
 <div class="horizontal">
   <h1>Personnalités</h1>
-  <div class="d-flex gap-3">
-    <a class="btn btn-primary" [routerLink]="['/tools','personality','new']">Nouvelle personnalité</a>
-    <a class="btn btn-primary" >Lier des personnalités à des films</a>
-  </div>
+  <a class="btn btn-primary" [routerLink]="['/tools','personality','new']">Nouvelle personnalité</a>
 </div>
 <div>
   <table class="table table-striped" *ngIf="this.personalities.length != 0; else noPersonality">
