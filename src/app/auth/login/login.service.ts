@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from "@angular/router";
-import { BehaviorSubject, Observable, tap, switchMap } from "rxjs";
+import { BehaviorSubject, Observable, catchError, finalize, of, switchMap, tap } from "rxjs";
 import { User } from "../../../models/user.model";
 import { map } from "rxjs/operators";
 
@@ -77,6 +77,26 @@ export class LoginService {
   logout(): void {
     sessionStorage.removeItem(this.TOKEN_KEY);
     this.currentUserSubject.next(null);
+  }
+
+  /**
+   * Envoie un log de déconnexion au serveur avant de nettoyer la session locale.
+   */
+  requestLogout(): Observable<void> {
+    const token = this.getToken();
+
+    if (!token) {
+      this.logout();
+      return of(void 0);
+    }
+
+    return this.http.post<void>(`${this.BASE_URL}/logout/log`, {
+      status: 'success',
+      client: 'frontend'
+    }).pipe(
+      catchError(() => of(void 0)),
+      finalize(() => this.logout())
+    );
   }
 
   /**

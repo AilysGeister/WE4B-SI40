@@ -5,16 +5,34 @@
       <p class="text-danger" *ngIf="message.length != 0">{{ message }}</p>
       <div class="col-8">
         <label for="title">Titre</label>
-        <input type="text" name="title" class="form-control form-control-sm" placeholder="Titre" formControlName="title" required minlength="3" maxlength="64">
+        <input type="text" name="title" class="form-control form-control-sm" placeholder="Titre" formControlName="title" required minlength="6" maxlength="64">
+        <small class="text-danger" *ngIf="formComment.get('title')?.touched && formComment.get('title')?.errors?.['required']">
+          Le titre est obligatoire.
+        </small>
+        <small class="text-danger" *ngIf="formComment.get('title')?.touched && formComment.get('title')?.errors?.['minlength']">
+          Le titre doit contenir au moins 6 caracteres.
+        </small>
       </div>
       <div class="col-4">
         <label for="note">Note</label>
         <input type="number" name="note" class="form-control form-control-sm" min="0" max="20" placeholder="Note /20" formControlName="note" required>
+        <small class="text-danger" *ngIf="formComment.get('note')?.touched && formComment.get('note')?.errors?.['required']">
+          La note est obligatoire.
+        </small>
+        <small class="text-danger" *ngIf="formComment.get('note')?.touched && (formComment.get('note')?.errors?.['min'] || formComment.get('note')?.errors?.['max'])">
+          La note doit etre comprise entre 0 et 20.
+        </small>
       </div>
     </div>
     <div class="mb-2">
       <label for="content">Contenu</label>
       <textarea name="content" class="form-control form-control-sm" rows="4" cols="50" placeholder="Votre commentaire..." formControlName="content" required minlength="64" maxlength="500"></textarea>
+      <small class="text-danger" *ngIf="formComment.get('content')?.touched && formComment.get('content')?.errors?.['required']">
+        Le contenu est obligatoire.
+      </small>
+      <small class="text-danger" *ngIf="formComment.get('content')?.touched && formComment.get('content')?.errors?.['minlength']">
+        Le commentaire doit contenir au moins 64 caracteres.
+      </small>
     </div>
     <button type="submit" class="btn btn-sm btn-primary">Publier</button>
   </form>

@@ -36,8 +36,12 @@ export class NewCommentComponent {
    */
   onSubmit(): void {
     if (this.formComment.invalid) {
+      this.formComment.markAllAsTouched();
+      this.message = "Veuillez corriger les champs du formulaire avant de publier.";
       return;
     }
+
+    this.message = "";
 
     //Récuperation des champs du formulaire pour l'API:
     const commentPayload = {
@@ -51,6 +55,7 @@ export class NewCommentComponent {
       next: (comment) => {
         this.created.emit(comment);
         this.formComment.reset();
+        this.message = "";
       },
       error: (err) => {
         this.message = err.error?.message || "Une erreur est survenue.";
